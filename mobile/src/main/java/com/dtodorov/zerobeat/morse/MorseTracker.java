@@ -8,7 +8,7 @@ import android.media.AudioTrack;
  * Created by diman on 7/9/2017.
  */
 
-public class MorseTracker
+public class MorseTracker implements ITracker
 {
     private int wpm;
     private int freqHz;
@@ -30,7 +30,8 @@ public class MorseTracker
         this.encoder = new Encoder(this.signalGenerator);
     }
 
-    public AudioTrack generate(String text)
+    @Override
+    public short[] track(String text)
     {
         signalGenerator.setBuffer(null);
         encoder.encode(text);
@@ -39,15 +40,6 @@ public class MorseTracker
         signalGenerator.setBuffer(buffer);
         encoder.encode(text);
 
-        AudioTrack track = new AudioTrack(
-                AudioManager.STREAM_MUSIC,
-                sample_rate,
-                AudioFormat.CHANNEL_OUT_STEREO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                count * (Short.SIZE / 8),
-                AudioTrack.MODE_STATIC);
-        track.write(buffer, 0, count);
-
-        return track;
+        return buffer;
     }
 }

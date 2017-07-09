@@ -56,6 +56,11 @@ public class Encoder
         alphabet.put(',', "--..--");
         alphabet.put('?', "..--..");
         alphabet.put('/', "-..-.");
+
+        // 	SK End of contact
+        //  KN Invitation
+        //  AR New Page
+        //  BT New Paragraph
     }
 
     public void encode(String text)
