@@ -103,6 +103,6 @@ public class SignalGenerator implements ISignalGenerator
     @Override
     public void writeWordSpace()
     {
-        writeSilence(this.buffer, this.dotSamples);
+        writeSilence(this.buffer, 2 * this.dashSamples);
     }
 }

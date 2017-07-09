@@ -15,6 +15,7 @@ public class Teacher implements ITeacher
     public Teacher(String lesson, int groupSize)
     {
         this.lesson = lesson.toCharArray();
+        this.groupSize = groupSize;
         rng = new Random(System.currentTimeMillis());
     }
 

@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         int sample_rate = 44100;
-        int count = sample_rate * 10 * 2; // 10 seconds of stereo should be enough for now
+        int count = sample_rate * 1 * 2; // 1 second of stereo should be enough for now
         String group;
         short[] buffer;
         AudioTrack track = new AudioTrack(
@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity
                 AudioFormat.CHANNEL_OUT_STEREO,
                 AudioFormat.ENCODING_PCM_16BIT,
                 count * (Short.SIZE / 8),
-                AudioTrack.MODE_STATIC);
+                AudioTrack.MODE_STREAM);
+        track.play();
 
         Lessons lessons = new Lessons();
         Teacher teacher = new Teacher(lessons.getLesson(0), 5);
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity
         group = teacher.intro();
         buffer = morseTracker.track(group);
         track.write(buffer, 0, buffer.length);
-        track.play();
 
         int i;
         for(i = 0; i < 20; i++)
