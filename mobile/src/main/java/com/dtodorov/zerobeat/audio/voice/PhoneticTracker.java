@@ -12,7 +12,7 @@ import java.util.HashMap;
  * Created by diman on 7/9/2017.
  */
 
-public class VoiceTracker
+public class PhoneticTracker
 {
     private Resources res;
     private HashMap<Character, Integer> resourceMap;
@@ -20,7 +20,7 @@ public class VoiceTracker
     private byte[] buffer;
     private int offset;
 
-    public VoiceTracker(Resources res)
+    public PhoneticTracker(Resources res)
     {
         this.res = res;
         resourceMap = new HashMap<>();

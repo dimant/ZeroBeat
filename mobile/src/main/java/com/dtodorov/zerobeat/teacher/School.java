@@ -1,13 +1,14 @@
 package com.dtodorov.zerobeat.teacher;
 
-import android.content.res.Resources;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 
 import com.dtodorov.zerobeat.Configuration;
 import com.dtodorov.zerobeat.audio.morse.MorseTracker;
-import com.dtodorov.zerobeat.audio.voice.VoiceTracker;
+import com.dtodorov.zerobeat.audio.voice.PhoneticTracker;
+
+import java.util.ArrayList;
 
 /**
  * Created by diman on 7/9/2017.
@@ -19,23 +20,40 @@ public class School implements ISchool
     private Lessons lessons;
     private Teacher teacher;
     private MorseTracker morseTracker;
-    private VoiceTracker voiceTracker;
-    private AudioTrack track;
+    private PhoneticTracker phoneticTracker;
     private Configuration configuration;
+    private int lesson;
 
     public School(
             Lessons lessons,
             Teacher teacher,
             MorseTracker morseTracker,
-            VoiceTracker voiceTracker,
+            PhoneticTracker phoneticTracker,
             Configuration configuration
     )
     {
         this.lessons = lessons;
         this.teacher = teacher;
         this.morseTracker = morseTracker;
-        this.voiceTracker = voiceTracker;
+        this.phoneticTracker = phoneticTracker;
         this.configuration = configuration;
+    }
+
+    @Override
+    public ArrayList<String> getLessons()
+    {
+        return lessons.getLessons();
+    }
+
+    @Override
+    public void setLesson(int lesson)
+    {
+        this.lesson = lesson;
+    }
+
+    public void start()
+    {
+
     }
 
     @Override
@@ -60,14 +78,12 @@ public class School implements ISchool
                 AudioTrack.MODE_STREAM);
         track.play();
 
-        int lesson = 0;
-
         group = teacher.intro(lessons.getLesson(lesson));
 
         sbuffer = morseTracker.track(group);
         track.write(sbuffer, 0, sbuffer.length);
 
-        bbuffer = voiceTracker.track(group);
+        bbuffer = phoneticTracker.track(group);
         track.write(bbuffer, 0, bbuffer.length);
 
         teaching = true;
@@ -78,7 +94,7 @@ public class School implements ISchool
             sbuffer = morseTracker.track(group);
             track.write(sbuffer, 0, sbuffer.length);
 
-            bbuffer = voiceTracker.track(group);
+            bbuffer = phoneticTracker.track(group);
             track.write(bbuffer, 0, bbuffer.length);
         }
     }

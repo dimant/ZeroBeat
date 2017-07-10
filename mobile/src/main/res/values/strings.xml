@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ZeroBeat</string>
+    <string name="lesson">Lesson</string>
+    <string name="stop">Stop</string>
 </resources>

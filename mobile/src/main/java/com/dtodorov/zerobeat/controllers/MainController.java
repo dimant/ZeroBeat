@@ -12,6 +12,8 @@ import com.github.oxo42.stateless4j.delegates.Action;
 
 public class MainController
 {
+    public static final String ShowLessons = "showLessons";
+
     private enum State
     {
         Idle,
@@ -20,14 +22,16 @@ public class MainController
 
     public enum Trigger
     {
-        Play
+        Play,
+        Stop
     };
 
     private StateMachine<State, Trigger> stateMachine;
+    private Object triggerParam;
 
     public MainController(
             IStringResolver stringResolver,
-            IEventDispatcher eventDispatcher,
+            final IEventDispatcher eventDispatcher,
             final ISchool school)
     {
         this.stateMachine = new StateMachine<State, Trigger>(State.Idle);
@@ -36,6 +40,7 @@ public class MainController
             @Override
             public void doIt()
             {
+                eventDispatcher.emit(MainController.ShowLessons, school.getLessons());
                 school.stop();
             }
         };
@@ -49,14 +54,20 @@ public class MainController
                     @Override
                     public void doIt()
                     {
+                        Integer lesson = (Integer) triggerParam;
+                        school.setLesson(lesson);
                         Thread t = new Thread(school);
                         t.start();
                     }
                 })
-                .permit(Trigger.Play, State.Idle);
+                .permitReentry(Trigger.Play)
+                .permit(Trigger.Stop, State.Idle);
+
+        homeAction.doIt();
     }
 
-    public void fire(Trigger trigger) {
+    public void fire(Trigger trigger, Object triggerParam) {
+        this.triggerParam = triggerParam;
         if(stateMachine.canFire(trigger)) {
             stateMachine.fire(trigger);
         }
