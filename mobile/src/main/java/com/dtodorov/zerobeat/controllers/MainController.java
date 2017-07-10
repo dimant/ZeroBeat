@@ -1,6 +1,7 @@
 package com.dtodorov.zerobeat.controllers;
 
 import com.dtodorov.androlib.eventdispatcher.IEventDispatcher;
+import com.dtodorov.androlib.eventdispatcher.IEventListener;
 import com.dtodorov.androlib.services.IStringResolver;
 import com.dtodorov.zerobeat.teacher.ISchool;
 import com.github.oxo42.stateless4j.StateMachine;
@@ -13,6 +14,10 @@ import com.github.oxo42.stateless4j.delegates.Action;
 public class MainController
 {
     public static final String ShowLessons = "showLessons";
+    public static final String ChangeLesson = "changeLesson";
+    public static final String PlayLesson = "playLesson";
+    public static final String PauseLesson = "pauseLesson";
+    public static final String StopLesson = "stopLesson";
 
     private enum State
     {
@@ -28,6 +33,7 @@ public class MainController
 
     private StateMachine<State, Trigger> stateMachine;
     private Object triggerParam;
+    private Thread schoolThread;
 
     public MainController(
             IStringResolver stringResolver,
@@ -41,7 +47,6 @@ public class MainController
             public void doIt()
             {
                 eventDispatcher.emit(MainController.ShowLessons, school.getLessons());
-                school.stop();
             }
         };
 
@@ -54,16 +59,62 @@ public class MainController
                     @Override
                     public void doIt()
                     {
-                        Integer lesson = (Integer) triggerParam;
-                        school.setLesson(lesson);
-                        Thread t = new Thread(school);
-                        t.start();
+
                     }
                 })
-                .permitReentry(Trigger.Play)
                 .permit(Trigger.Stop, State.Idle);
 
         homeAction.doIt();
+
+        eventDispatcher.register(MainController.ChangeLesson, new IEventListener()
+        {
+            @Override
+            public void callback(Object param)
+            {
+                school.setLesson((Integer) param);
+            }
+        });
+
+        eventDispatcher.register(MainController.PlayLesson, new IEventListener()
+        {
+            @Override
+            public void callback(Object param)
+            {
+                if(schoolThread != null && schoolThread.isAlive())
+                {
+                    schoolThread.interrupt();
+                    school.stop();
+                }
+
+                school.play();
+                schoolThread = new Thread(school);
+                schoolThread.start();
+
+            }
+        });
+
+        eventDispatcher.register(MainController.PauseLesson, new IEventListener()
+        {
+            @Override
+            public void callback(Object param)
+            {
+                school.pause();
+            }
+        });
+
+        eventDispatcher.register(MainController.StopLesson, new IEventListener()
+        {
+            @Override
+            public void callback(Object param)
+            {
+                if(schoolThread != null && schoolThread.isAlive())
+                {
+                    schoolThread.interrupt();
+                }
+                schoolThread = null;
+                school.stop();
+            }
+        });
     }
 
     public void fire(Trigger trigger, Object triggerParam) {

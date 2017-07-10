@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class School implements ISchool
 {
-    private boolean teaching;
+    private final AudioTrack track;
     private Lessons lessons;
     private Teacher teacher;
     private MorseTracker morseTracker;
@@ -37,6 +37,15 @@ public class School implements ISchool
         this.morseTracker = morseTracker;
         this.phoneticTracker = phoneticTracker;
         this.configuration = configuration;
+
+        int count = configuration.getSamplingRate() * 60 / configuration.getWpm(); // enough space for one PARIS
+        track = new AudioTrack(
+                AudioManager.STREAM_MUSIC,
+                configuration.getSamplingRate(),
+                AudioFormat.CHANNEL_OUT_MONO,
+                AudioFormat.ENCODING_PCM_16BIT,
+                count * (Short.SIZE / 8),
+                AudioTrack.MODE_STREAM);
     }
 
     @Override
@@ -48,18 +57,27 @@ public class School implements ISchool
     @Override
     public void setLesson(int lesson)
     {
+        track.flush();
         this.lesson = lesson;
-    }
-
-    public void start()
-    {
-
     }
 
     @Override
     public void stop()
     {
-        teaching = false;
+        track.stop();
+        track.flush();
+    }
+
+    @Override
+    public void pause()
+    {
+        track.pause();
+    }
+
+    @Override
+    public void play()
+    {
+        track.play();
     }
 
     @Override
@@ -68,34 +86,48 @@ public class School implements ISchool
         String group;
         short[] sbuffer;
         byte[] bbuffer;
-        int count = configuration.getSamplingRate() * 60 / configuration.getWpm(); // enough space for one PARIS
-        AudioTrack track = new AudioTrack(
-                AudioManager.STREAM_MUSIC,
-                configuration.getSamplingRate(),
-                AudioFormat.CHANNEL_OUT_MONO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                count * (Short.SIZE / 8),
-                AudioTrack.MODE_STREAM);
-        track.play();
 
         group = teacher.intro(lessons.getLesson(lesson));
+        if(Thread.currentThread().isInterrupted())
+            return;
 
         sbuffer = morseTracker.track(group);
+        if(Thread.currentThread().isInterrupted())
+            return;
+
         track.write(sbuffer, 0, sbuffer.length);
+        if(Thread.currentThread().isInterrupted())
+            return;
 
         bbuffer = phoneticTracker.track(group);
-        track.write(bbuffer, 0, bbuffer.length);
+        if(Thread.currentThread().isInterrupted())
+            return;
 
-        teaching = true;
-        while(teaching)
+        track.write(bbuffer, 0, bbuffer.length);
+        if(Thread.currentThread().isInterrupted())
+            return;
+
+        while(true)
         {
             group = teacher.group(lessons.getLesson(lesson));
+            if(Thread.currentThread().isInterrupted())
+                return;
 
             sbuffer = morseTracker.track(group);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
             track.write(sbuffer, 0, sbuffer.length);
+            if(Thread.currentThread().isInterrupted())
+                return;
 
             bbuffer = phoneticTracker.track(group);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
             track.write(bbuffer, 0, bbuffer.length);
+            if(Thread.currentThread().isInterrupted())
+                return;
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.dtodorov.zerobeat;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -64,13 +65,33 @@ public class MainActivity extends AppCompatActivity
                         new PhoneticTracker(getResources()),
                         configuration));
 
-        Button buttonPlay = (Button) findViewById(R.id.stop);
+        Button buttonPlay = (Button) findViewById(R.id.play);
         buttonPlay.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                mainController.fire(MainController.Trigger.Stop, null);
+                eventDispatcher.emit(MainController.PlayLesson, null);
+            }
+        });
+
+        Button buttonPause = (Button) findViewById(R.id.pause);
+        buttonPause.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                eventDispatcher.emit(MainController.PauseLesson, null);
+            }
+        });
+
+        Button buttonStop = (Button) findViewById(R.id.stop);
+        buttonStop.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                eventDispatcher.emit(MainController.StopLesson, null);
             }
         });
 
@@ -78,9 +99,7 @@ public class MainActivity extends AppCompatActivity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mainController.fire(
-                        MainController.Trigger.Play,
-                        position);
+                eventDispatcher.emit(MainController.ChangeLesson, position);
             }
         });
     }
