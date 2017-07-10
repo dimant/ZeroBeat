@@ -8,34 +8,33 @@ import java.util.Random;
 
 public class Teacher implements ITeacher
 {
-    private char[] lesson;
-    private int groupSize;
+    private ITeacherConfiguration configuration;
     private Random rng;
 
-    public Teacher(String lesson, int groupSize)
+    public Teacher(ITeacherConfiguration configuration)
     {
-        this.lesson = lesson.toCharArray();
-        this.groupSize = groupSize;
+        this.configuration = configuration;
         rng = new Random(System.currentTimeMillis());
     }
 
     @Override
-    public String intro()
+    public String intro(String lesson)
     {
-        return Stringer.join(lesson, " ");
+        return Stringer.join(lesson.toCharArray(), " ");
     }
 
     @Override
-    public String group()
+    public String group(String lesson)
     {
         int i, idx;
-        StringBuilder builder = new StringBuilder(groupSize + 1);
+        StringBuilder builder = new StringBuilder(configuration.getGroupSize() + 1);
 
-        for(i = 0; i < groupSize; i++)
+        for(i = 0; i < configuration.getGroupSize(); i++)
         {
             builder.append(
-                    lesson[
-                            rng.nextInt(lesson.length - 1)]);
+                    lesson.charAt(
+                            rng.nextInt(lesson.length() - 1)));
+
         }
         builder.append(' ');
 

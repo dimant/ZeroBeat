@@ -6,22 +6,12 @@ package com.dtodorov.zerobeat.audio.morse;
 
 public class MorseTracker
 {
-    private int wpm;
-    private int freqHz;
-    private int sample_rate;
     private Encoder encoder;
     private SignalGenerator signalGenerator;
-    public MorseTracker(int wpm, int freqHz, int sample_rate, int channels)
-    {
-        this.wpm = wpm;
-        this.freqHz = freqHz;
-        this.sample_rate = sample_rate;
 
-        this.signalGenerator = new SignalGenerator(
-                wpm,
-                freqHz,
-                sample_rate,
-                channels); // mono
+    public MorseTracker(SignalGenerator signalGenerator)
+    {
+        this.signalGenerator = signalGenerator;
 
         this.encoder = new Encoder(this.signalGenerator);
     }

@@ -10,29 +10,34 @@ public class SignalGenerator implements ISignalGenerator
     // from this: dot duration = 20 * 50 / desired wpm
     private static final double DOT_STANDARD = 20 * 50;
 
-    private int dotSamples;
-    private int dashSamples;
-
-    private int sample_rate;
-    private int channels;
-    private int freqHz;
+    private ISignalGeneratorConfiguration configuration;
 
     private short[] buffer;
     int offset;
 
-    public SignalGenerator(int wpm, int freqHz, int sample_rate, int channels)
+    public SignalGenerator(ISignalGeneratorConfiguration configuration)
     {
-        this.sample_rate = sample_rate;
-        this.channels = channels;
-        this.freqHz = freqHz;
+        this.configuration = configuration;
+    }
 
-        double samples_per_ms = sample_rate / 1000.0;
+    public double getDotDuration()
+    {
+        return DOT_STANDARD / configuration.getWpm();
+    }
 
-        double dotDuration = DOT_STANDARD / wpm;
-        double dashDuration = 3 * dotDuration;
+    public double getDashDuration()
+    {
+        return 3 * getDotDuration();
+    }
 
-        this.dotSamples = (int) Math.round(samples_per_ms * dotDuration);
-        this.dashSamples = (int) Math.round(samples_per_ms * dashDuration);
+    public int getDotSamples()
+    {
+        return (int) Math.round(configuration.getSamplingRate() * getDotDuration() / 1000);
+    }
+
+    public int getDashSamples()
+    {
+        return (int) Math.round(configuration.getSamplingRate() * getDashDuration() / 1000);
     }
 
     public void setBuffer(short[] buffer)
@@ -54,9 +59,9 @@ public class SignalGenerator implements ISignalGenerator
 
         for(i = 0; i < samples; i++)
         {
-            sample = (short)(Math.sin(2 * Math.PI * i / (this.sample_rate / this.freqHz)) * 0x7FFF);
+            sample = (short)(Math.sin(2 * Math.PI * i / (configuration.getSamplingRate() / configuration.getFrequency())) * 0x7FFF);
 
-            for(j = 0; j < channels; j++)
+            for(j = 0; j < configuration.getChannels(); j++)
             {
                 if(data != null)
                     data[offset] = sample;
@@ -73,7 +78,7 @@ public class SignalGenerator implements ISignalGenerator
 
         for(i = 0; i < samples; i++)
         {
-            for(j = 0; j < channels; j++)
+            for(j = 0; j < configuration.getChannels(); j++)
             {
                 if(data != null)
                     data[offset] = sample;
@@ -85,24 +90,24 @@ public class SignalGenerator implements ISignalGenerator
     @Override
     public void writeDash()
     {
-        writeSignal(this.buffer, this.dashSamples);
+        writeSignal(this.buffer, getDashSamples());
     }
 
     @Override
     public void writeDot()
     {
-        writeSignal(this.buffer, this.dotSamples);
+        writeSignal(this.buffer, getDotSamples());
     }
 
     @Override
     public void writeSymbolSpace()
     {
-        writeSilence(this.buffer, this.dotSamples);
+        writeSilence(this.buffer, getDotSamples());
     }
 
     @Override
     public void writeWordSpace()
     {
-        writeSilence(this.buffer, 2 * this.dashSamples);
+        writeSilence(this.buffer, 2 * getDashSamples());
     }
 }
