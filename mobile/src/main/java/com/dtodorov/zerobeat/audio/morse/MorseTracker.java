@@ -1,21 +1,17 @@
-package com.dtodorov.zerobeat.morse;
-
-import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioTrack;
+package com.dtodorov.zerobeat.audio.morse;
 
 /**
  * Created by diman on 7/9/2017.
  */
 
-public class MorseTracker implements ITracker
+public class MorseTracker
 {
     private int wpm;
     private int freqHz;
     private int sample_rate;
     private Encoder encoder;
     private SignalGenerator signalGenerator;
-    public MorseTracker(int wpm, int freqHz, int sample_rate)
+    public MorseTracker(int wpm, int freqHz, int sample_rate, int channels)
     {
         this.wpm = wpm;
         this.freqHz = freqHz;
@@ -25,12 +21,11 @@ public class MorseTracker implements ITracker
                 wpm,
                 freqHz,
                 sample_rate,
-                2); // Stereo
+                channels); // mono
 
         this.encoder = new Encoder(this.signalGenerator);
     }
 
-    @Override
     public short[] track(String text)
     {
         signalGenerator.setBuffer(null);

@@ -1,4 +1,4 @@
-package com.dtodorov.zerobeat.morse;
+package com.dtodorov.zerobeat.audio.morse;
 
 import java.util.HashMap;
 

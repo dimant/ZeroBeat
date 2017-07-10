@@ -1,4 +1,4 @@
-package com.dtodorov.zerobeat.morse;
+package com.dtodorov.zerobeat.audio.morse;
 
 /**
  * Created by diman on 7/8/2017.
