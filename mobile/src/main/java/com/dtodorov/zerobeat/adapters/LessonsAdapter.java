@@ -1,10 +1,7 @@
 package com.dtodorov.zerobeat.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +45,8 @@ public class LessonsAdapter extends ArrayAdapter<String>
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_lesson, parent, false);
-            viewHolder.Name = (TextView) convertView.findViewById(R.id.name);
-            viewHolder.Description = (TextView) convertView.findViewById(R.id.description);
+            viewHolder.Name = (TextView) convertView.findViewById(R.id.lesson_name);
+            viewHolder.Description = (TextView) convertView.findViewById(R.id.lesson_description);
 
             // Cache the viewHolder object inside the fresh view
             convertView.setTag(viewHolder);

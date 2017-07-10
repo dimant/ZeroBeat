@@ -21,7 +21,11 @@ import com.dtodorov.zerobeat.teacher.Lessons;
 import com.dtodorov.zerobeat.teacher.School;
 import com.dtodorov.zerobeat.teacher.Teacher;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+
+import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 
 
 public class MainActivity extends AppCompatActivity
@@ -65,33 +69,13 @@ public class MainActivity extends AppCompatActivity
                         new PhoneticTracker(getResources()),
                         configuration));
 
-        Button buttonPlay = (Button) findViewById(R.id.play);
-        buttonPlay.setOnClickListener(new View.OnClickListener()
+        FloatingMusicActionButton buttonMusic = (FloatingMusicActionButton) findViewById(R.id.button_music);
+        buttonMusic.setOnMusicFabClickListener(new FloatingMusicActionButton.OnMusicFabClickListener()
         {
             @Override
-            public void onClick(View v)
+            public void onClick(@NotNull View view)
             {
-                eventDispatcher.emit(MainController.PlayLesson, null);
-            }
-        });
-
-        Button buttonPause = (Button) findViewById(R.id.pause);
-        buttonPause.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                eventDispatcher.emit(MainController.PauseLesson, null);
-            }
-        });
-
-        Button buttonStop = (Button) findViewById(R.id.stop);
-        buttonStop.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                eventDispatcher.emit(MainController.StopLesson, null);
+                mainController.fire(MainController.Trigger.Play, null);
             }
         });
 
