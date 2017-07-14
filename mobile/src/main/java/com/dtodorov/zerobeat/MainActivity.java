@@ -1,11 +1,14 @@
 package com.dtodorov.zerobeat;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.dtodorov.androlib.eventdispatcher.EventDispatcher;
@@ -30,8 +33,11 @@ import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 
 public class MainActivity extends AppCompatActivity
 {
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+
     private MainController mainController;
     private IEventDispatcher eventDispatcher;
+    private Configuration configuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         final StringResolver stringResolver = new StringResolver(getResources());
         eventDispatcher = new EventDispatcher();
 
-        Configuration configuration = new Configuration();
+        configuration = new Configuration();
         configuration.setWpm(15);
         configuration.setSamplingRate(44100);
         configuration.setFrequency(701);
@@ -84,6 +90,19 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 eventDispatcher.emit(MainController.ChangeLesson, position);
+            }
+        });
+
+        ImageButton buttonSettings = (ImageButton) findViewById(R.id.button_settings);
+        buttonSettings.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                Bundle bundle = new Bundle();
+                
+                startActivity(intent);
             }
         });
     }

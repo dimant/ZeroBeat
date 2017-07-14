@@ -32,6 +32,9 @@
                 <action android:name="android.media.browse.MediaBrowserService"/>
             </intent-filter>
         </service>
+
+        <activity android:name=".SettingsActivity">
+        </activity>
     </application>
 
 </manifest>
