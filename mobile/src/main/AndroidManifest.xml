@@ -9,12 +9,20 @@
         android:roundIcon="@mipmap/ic_headphones"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".MainActivity"
+                  android:configChanges="orientation"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity android:name=".SettingsActivity"
+                  android:configChanges="orientation"
+                  android:screenOrientation="portrait">
         </activity>
 
         <meta-data
@@ -32,9 +40,6 @@
                 <action android:name="android.media.browse.MediaBrowserService"/>
             </intent-filter>
         </service>
-
-        <activity android:name=".SettingsActivity">
-        </activity>
     </application>
 
 </manifest>
