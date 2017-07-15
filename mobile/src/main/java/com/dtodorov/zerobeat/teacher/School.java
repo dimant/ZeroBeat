@@ -64,20 +64,29 @@ public class School implements ISchool
     @Override
     public void stop()
     {
-        track.stop();
-        track.flush();
+        if(track.getPlayState() != AudioTrack.PLAYSTATE_STOPPED)
+        {
+            track.stop();
+            track.flush();
+        }
     }
 
     @Override
     public void pause()
     {
-        track.pause();
+        if(track.getPlayState() == AudioTrack.PLAYSTATE_PLAYING)
+        {
+            track.pause();
+        }
     }
 
     @Override
     public void play()
     {
-        track.play();
+        if(track.getPlayState() != AudioTrack.PLAYSTATE_PLAYING)
+        {
+            track.play();
+        }
     }
 
     @Override
