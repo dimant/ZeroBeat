@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:custom="http://schemas.android.com/apk/res-auto">
     <EditTextPreference android:title="Your Name"
                         android:key="username"
                         android:summary="Please provide your username"></EditTextPreference>
@@ -13,4 +14,24 @@
                         android:defaultValue="1"
                         android:entries="@array/listArray"
                         android:entryValues="@array/listValues" />
+
+    <!--android:dialogTitleColor="@android:color/black"-->
+    <!--android:dialogMessageColor="@android:color/black"-->
+    <!--android:dialogButtonTextColor="@android:color/black"-->
+    <!--android:dialogBackground="@android:color/white"-->
+
+    <de.mrapp.android.preference.SeekBarPreference
+        android:defaultValue="33.336"
+        android:dialogMessage="dialog message"
+        android:dialogTitle="dialog title"
+        android:key="seekbar"
+        android:max="150"
+        android:summary="seekbar summary"
+        android:title="seekbar title"
+        custom:decimals="2"
+        custom:floatingPointSeparator="."
+        custom:min="25"
+        custom:showProgress="true"
+        custom:showValueAsSummary="false"
+        custom:unit="Unit"/>
 </PreferenceScreen>
