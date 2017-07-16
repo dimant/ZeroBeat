@@ -24,7 +24,8 @@ public class MainController
 
     public enum Trigger
     {
-        Play
+        Play,
+        Stop
     };
 
     private StateMachine<State, Trigger> stateMachine;
@@ -75,7 +76,8 @@ public class MainController
                         schoolThread.start();
                     }
                 })
-                .permit(Trigger.Play, State.Idle);
+                .permit(Trigger.Play, State.Idle)
+                .permit(Trigger.Stop, State.Idle);
 
         homeAction.doIt();
 

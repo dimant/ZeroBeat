@@ -4,7 +4,7 @@
     <string name="stop">Stop</string>
     <string name="play">Play</string>
     <string name="pause">Pause</string>
-    
+
     <string name="attributions_title">Attributions</string>
     <string name="attributions_summary">3rd party libraries</string>
     <string name="attributions_content">FloatingMusicActionButton by Tim Rijckaert (github); AndroidMaterialPreferences by Michael Rapp (github)</string>

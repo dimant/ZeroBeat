@@ -1,7 +1,9 @@
 package com.dtodorov.zerobeat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +35,8 @@ import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 
 public class MainActivity extends AppCompatActivity
 {
+    private static final int REQUEST_CODE_BASE = 1024;
+    private static final int REQUEST_CODE_PREFERENCES = 1024 + 1;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     private MainController mainController;
@@ -49,11 +53,7 @@ public class MainActivity extends AppCompatActivity
         eventDispatcher = new EventDispatcher();
 
         configuration = new Configuration();
-        configuration.setWpm(15);
-        configuration.setSamplingRate(44100);
-        configuration.setFrequency(701);
-        configuration.setGroupSize(5);
-        configuration.setChannels(1);
+        loadConfiguration(configuration);
 
         eventDispatcher.register(MainController.ShowLessons, new IEventListener() {
             @Override
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity
                         new PhoneticTracker(getResources()),
                         configuration));
 
-        FloatingMusicActionButton buttonMusic = (FloatingMusicActionButton) findViewById(R.id.button_music);
+        final FloatingMusicActionButton buttonMusic = (FloatingMusicActionButton) findViewById(R.id.button_music);
         buttonMusic.setOnMusicFabClickListener(new FloatingMusicActionButton.OnMusicFabClickListener()
         {
             @Override
@@ -99,9 +99,38 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                mainController.fire(MainController.Trigger.Stop, null);
+                buttonMusic.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_STOP);
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, MainActivity.REQUEST_CODE_PREFERENCES);
             }
         });
+    }
+
+    private void loadConfiguration(Configuration configuration)
+    {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        int wpm = SettingsActivity.getWpm(this);
+        configuration.setWpm(wpm);
+
+        int frequency = SettingsActivity.getFrequency(this);
+        configuration.setFrequency(frequency);
+
+        configuration.setGroupSize(5);
+
+        configuration.setSamplingRate(44100);
+        configuration.setChannels(1);
+    }
+
+    @Override
+    public void onActivityResult (int requestCode, int resultCode, Intent data)
+    {
+        switch(requestCode)
+        {
+            case MainActivity.REQUEST_CODE_PREFERENCES:
+                loadConfiguration(configuration);
+                break;
+        }
     }
 }
