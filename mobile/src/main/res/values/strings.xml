@@ -4,4 +4,20 @@
     <string name="stop">Stop</string>
     <string name="play">Play</string>
     <string name="pause">Pause</string>
+    
+    <string name="attributions_title">Attributions</string>
+    <string name="attributions_summary">3rd party libraries</string>
+    <string name="attributions_content">FloatingMusicActionButton by Tim Rijckaert (github); AndroidMaterialPreferences by Michael Rapp (github)</string>
+
+    <string name="seekbar_frequency_title">Tone Frequency</string>
+    <string name="seekbar_frequency_summary">Adjust the frequency of the side tone.</string>
+    <string name="seekbar_frequency_message">Typically this is around 700 to 800 hertz. Adjust this if you have difficulty recognizing characters or if you want to keep fresh.</string>
+    <string name="seekbar_frequency_unit">Hertz</string>
+    <string name="seekbar_frequency_key">seekbar_frequency</string>
+
+    <string name="seekbar_wpm_title">Words per Minute</string>
+    <string name="seekbar_wpm_summary">Adjust the sending speed.</string>
+    <string name="seekbar_wpm_message">Start with the words per minute you want to achieve. Resist the temptation to lower it if you cant copy every character, just keep at it!</string>
+    <string name="seekbar_wpm_unit">wpm</string>
+    <string name="seekbar_wpm_key">seekbar_wpm</string>
 </resources>

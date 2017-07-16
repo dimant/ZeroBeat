@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import de.mrapp.android.preference.SeekBarPreference;
+
 public class SettingsActivity extends AppCompatActivity
 {
 
@@ -37,6 +39,19 @@ public class SettingsActivity extends AppCompatActivity
         {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+
+            SeekBarPreference wpmPreference =
+                    (SeekBarPreference) findPreference(getString(R.string.seekbar_wpm_key));
+            wpmPreference.setMaxValue(60);
+            wpmPreference.setMinValue(10);
+            wpmPreference.setValue(15);
+
+            SeekBarPreference frequencyPreference =
+                    (SeekBarPreference) findPreference(getString(R.string.seekbar_frequency_key));
+            frequencyPreference.setMaxValue(800);
+            frequencyPreference.setMinValue(600);
+            frequencyPreference.setValue(701);
+
         }
     }
 }

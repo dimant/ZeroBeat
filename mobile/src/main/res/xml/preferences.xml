@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:custom="http://schemas.android.com/apk/res-auto">
-    <EditTextPreference android:title="Your Name"
-                        android:key="username"
-                        android:summary="Please provide your username"></EditTextPreference>
-    <CheckBoxPreference android:title="Application Updates"
-                        android:defaultValue="false"
-                        android:summary="This option if selected will allow the application to check for latest versions."
-                        android:key="applicationUpdates" />
-    <ListPreference     android:title="Download Details"
-                        android:summary="Select the kind of data that you would like to download"
-                        android:key="downloadType"
-                        android:defaultValue="1"
-                        android:entries="@array/listArray"
-                        android:entryValues="@array/listValues" />
-
-    <!--android:dialogTitleColor="@android:color/black"-->
-    <!--android:dialogMessageColor="@android:color/black"-->
-    <!--android:dialogButtonTextColor="@android:color/black"-->
-    <!--android:dialogBackground="@android:color/white"-->
 
     <de.mrapp.android.preference.SeekBarPreference
-        android:defaultValue="33.336"
-        android:dialogMessage="dialog message"
-        android:dialogTitle="dialog title"
-        android:key="seekbar"
-        android:max="150"
-        android:summary="seekbar summary"
-        android:title="seekbar title"
-        custom:decimals="2"
+        android:title="@string/seekbar_wpm_title"
+        android:summary="@string/seekbar_wpm_summary"
+        android:dialogTitle="@string/seekbar_wpm_title"
+        android:dialogMessage="@string/seekbar_wpm_message"
+        custom:unit="@string/seekbar_wpm_unit"
+        android:key="@string/seekbar_wpm_key"
+        android:max="1000"
+        custom:min="0"
+        custom:decimals="0"
         custom:floatingPointSeparator="."
-        custom:min="25"
         custom:showProgress="true"
-        custom:showValueAsSummary="false"
-        custom:unit="Unit"/>
+        custom:showValueAsSummary="false"/>
+
+    <de.mrapp.android.preference.SeekBarPreference
+        android:title="@string/seekbar_frequency_title"
+        android:summary="@string/seekbar_frequency_summary"
+        android:dialogTitle="@string/seekbar_frequency_title"
+        android:dialogMessage="@string/seekbar_frequency_message"
+        custom:unit="@string/seekbar_frequency_unit"
+        android:key="@string/seekbar_frequency_key"
+        android:max="1000"
+        custom:min="0"
+        custom:decimals="0"
+        custom:floatingPointSeparator="."
+        custom:showProgress="true"
+        custom:showValueAsSummary="false"/>
+
+    <de.mrapp.android.preference.DialogPreference
+        android:title="@string/attributions_title"
+        android:summary="@string/attributions_summary"
+        android:dialogMessage="@string/attributions_content"
+        android:key="preference_attributions"/>
+
 </PreferenceScreen>
