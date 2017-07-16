@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ZeroBeat</string>
+    <string name="lesson">Lektion</string>
+    <string name="stop">Stop</string>
+    <string name="play">Spiel</string>
+    <string name="pause">Pause</string>
+
+    <string name="attributions_title">Zuschreibung</string>
+    <string name="attributions_summary">Bibliotheken von Dritten</string>
+    <string name="attributions_content">FloatingMusicActionButton von Tim Rijckaert (github); AndroidMaterialPreferences von Michael Rapp (github)</string>
+
+    <string name="seekbar_frequency_title">Ton Frequenz</string>
+    <string name="seekbar_frequency_summary">Einstellen der Frequenz des Seitentons.</string>
+    <string name="seekbar_frequency_message">Üblicherweise zwischen 700 und 800 Hertz. Stellen Sie die Frequenz ein wenn Sie Schwierigkeiten haben die Buchstaben zu erkennen oder wenn Sie auffrischen wollen.</string>
+    <string name="seekbar_frequency_unit">Hertz</string>
+    <string name="seekbar_frequency_key">seekbar_frequency</string>
+
+    <string name="seekbar_wpm_title">Worte pro Minute</string>
+    <string name="seekbar_wpm_summary">Einstellung der Sendegeschwindigkeit.</string>
+    <string name="seekbar_wpm_message">Beginnen Sie mit der Geschwindigkeit die Sie erreichen wollen. Widerstehen Sie der Versuchung eine niedrigere Geschwindigkeit zu wählen wenn Sie nicht jeden Buchstaben erkennen, einfach weiter üben!</string>
+    <string name="seekbar_wpm_unit">WpM</string>
+    <string name="seekbar_wpm_key">seekbar_wpm</string>
+</resources>
