@@ -118,7 +118,8 @@ public class MainActivity extends AppCompatActivity
         int frequency = SettingsActivity.getFrequency(this);
         configuration.setFrequency(frequency);
 
-        configuration.setGroupSize(5);
+        int groupSize = SettingsActivity.getGroupSize(this);
+        configuration.setGroupSize(groupSize);
 
         configuration.setSamplingRate(44100);
         configuration.setChannels(1);

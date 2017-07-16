@@ -20,4 +20,11 @@
     <string name="seekbar_wpm_message">Start with the words per minute you want to achieve. Resist the temptation to lower it if you cant copy every character, just keep at it!</string>
     <string name="seekbar_wpm_unit">wpm</string>
     <string name="seekbar_wpm_key">seekbar_wpm</string>
+
+    <string name="numberpicker_group_size_title">Group Size</string>
+    <string name="numberpicker_group_size_summary">Number of characters per group.</string>
+    <string name="numberpicker_group_size_message">Typical lessons are thaught at 5 characters per group. If you have trouble copy 5 characters at a time, reduce this number.</string>
+    <string name="numberpicker_group_size_unit">Chars</string>
+    <string name="numberpicker_group_size_key">numberpicker_group_size</string>
+
 </resources>

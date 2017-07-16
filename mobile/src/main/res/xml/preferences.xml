@@ -16,6 +16,13 @@
         custom:showProgress="true"
         custom:showValueAsSummary="false"/>
 
+    <de.mrapp.android.preference.NumberPickerPreference
+        android:title="@string/numberpicker_group_size_title"
+        android:summary="@string/numberpicker_group_size_summary"
+        android:dialogMessage="@string/numberpicker_group_size_message"
+        android:key="numberpicker_group_size"
+        custom:unit="@string/numberpicker_group_size_unit"/>
+
     <de.mrapp.android.preference.SeekBarPreference
         android:title="@string/seekbar_frequency_title"
         android:summary="@string/seekbar_frequency_summary"
