@@ -17,7 +17,7 @@
 
     <string name="seekbar_wpm_title">Слов в Минуту</string>
     <string name="seekbar_wpm_summary">Рекомендованная скорость слов.</string>
-    <string name="seekbar_wpm_message">Начните с количества слов в минуту, которую Вы хотите выполнить.Удержитесь от соблазна уменьшить их колличество, если Вы не сможете расшифровать каждый символ.Просто держите темп!</string>
+    <string name="seekbar_wpm_message">Начните с количества слов в минуту, которую Вы хотите выполнить. Удержитесь от соблазна уменьшить их колличество, если Вы не сможете расшифровать каждый символ.Просто держите темп!</string>
     <string name="seekbar_wpm_unit">слов</string>
     <string name="seekbar_wpm_key">seekbar_wpm</string>
 </resources>
