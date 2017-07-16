@@ -55,25 +55,35 @@ public class MainActivity extends AppCompatActivity
         configuration = new Configuration();
         loadConfiguration(configuration);
 
+        final ListView listView = (ListView) findViewById(R.id.lessons);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                eventDispatcher.emit(MainController.ChangeLesson, position);
+            }
+        });
+
+        final School school = new School(
+                new Lessons(),
+                new Teacher(configuration),
+                new MorseTracker(new SignalGenerator(configuration)),
+                new PhoneticTracker(getResources()),
+                configuration);
+
         eventDispatcher.register(MainController.ShowLessons, new IEventListener() {
             @Override
             public void callback(Object param) {
                 ArrayList<String> lessons = (ArrayList<String>) param;
                 LessonsAdapter adapter = new LessonsAdapter(MainActivity.this, lessons, stringResolver);
-                ListView listView = (ListView) findViewById(R.id.lessons);
                 listView.setAdapter(adapter);
+                listView.setItemChecked(school.getLesson(), true);
             }
         });
 
         mainController = new MainController(
                 stringResolver,
                 eventDispatcher,
-                new School(
-                        new Lessons(),
-                        new Teacher(configuration),
-                        new MorseTracker(new SignalGenerator(configuration)),
-                        new PhoneticTracker(getResources()),
-                        configuration));
+                school);
 
         final FloatingMusicActionButton buttonMusic = (FloatingMusicActionButton) findViewById(R.id.button_music);
         buttonMusic.setOnMusicFabClickListener(new FloatingMusicActionButton.OnMusicFabClickListener()
@@ -82,14 +92,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(@NotNull View view)
             {
                 mainController.fire(MainController.Trigger.Play, null);
-            }
-        });
-
-        final ListView listView = (ListView) findViewById(R.id.lessons);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                eventDispatcher.emit(MainController.ChangeLesson, position);
             }
         });
 

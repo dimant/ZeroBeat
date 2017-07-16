@@ -12,6 +12,8 @@ public interface ISchool extends Runnable
 
     void setLesson(int lesson);
 
+    int getLesson();
+
     void stop();
 
     void pause();

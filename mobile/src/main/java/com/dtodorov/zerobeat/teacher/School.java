@@ -62,6 +62,12 @@ public class School implements ISchool
     }
 
     @Override
+    public int getLesson()
+    {
+        return this.lesson;
+    }
+
+    @Override
     public void stop()
     {
         if(track.getPlayState() != AudioTrack.PLAYSTATE_STOPPED)
