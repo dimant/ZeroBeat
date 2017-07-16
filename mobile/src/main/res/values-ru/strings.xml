@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ZeroBeat</string>
+    <string name="lesson">Урок</string>
+    <string name="stop">Стоп</string>
+    <string name="play">Играть</string>
+    <string name="pause">Пауза</string>
+
+    <string name="attributions_title">Приписывание</string>
+    <string name="attributions_summary">Третих лиц библиотеки.</string>
+    <string name="attributions_content">FloatingMusicActionButton от Tim Rijckaert (github); AndroidMaterialPreferences от Michael Rapp (github)</string>
+
+    <string name="seekbar_frequency_title">Звуковая Частота</string>
+    <string name="seekbar_frequency_summary">Настройка боковой частоты.</string>
+    <string name="seekbar_frequency_message">Обычно это около 700-800 Герц. Настроить это, если Вы имеете трудности с распознанием букв или Вы хотите освежить программу.</string>
+    <string name="seekbar_frequency_unit">Гц</string>
+    <string name="seekbar_frequency_key">seekbar_frequency</string>
+
+    <string name="seekbar_wpm_title">Слов в Минуту</string>
+    <string name="seekbar_wpm_summary">Рекомендованная скорость слов.</string>
+    <string name="seekbar_wpm_message">Начните с количества слов в минуту, которую Вы хотите выполнить.Удержитесь от соблазна уменьшить их колличество, если Вы не сможете расшифровать каждый символ.Просто держите темп!</string>
+    <string name="seekbar_wpm_unit">слов</string>
+    <string name="seekbar_wpm_key">seekbar_wpm</string>
+</resources>
