@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity
 {
     private static final int REQUEST_CODE_BASE = 1024;
     private static final int REQUEST_CODE_PREFERENCES = 1024 + 1;
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     private MainController mainController;
     private IEventDispatcher eventDispatcher;
