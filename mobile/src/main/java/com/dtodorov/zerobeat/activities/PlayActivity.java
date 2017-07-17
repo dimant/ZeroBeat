@@ -1,24 +1,22 @@
-package com.dtodorov.zerobeat;
+package com.dtodorov.zerobeat.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.dtodorov.androlib.eventdispatcher.EventDispatcher;
 import com.dtodorov.androlib.eventdispatcher.IEventDispatcher;
 import com.dtodorov.androlib.eventdispatcher.IEventListener;
 import com.dtodorov.androlib.services.StringResolver;
+import com.dtodorov.zerobeat.Configuration;
+import com.dtodorov.zerobeat.R;
 import com.dtodorov.zerobeat.adapters.LessonsAdapter;
 import com.dtodorov.zerobeat.audio.morse.MorseTracker;
 import com.dtodorov.zerobeat.audio.morse.SignalGenerator;
@@ -35,11 +33,8 @@ import java.util.ArrayList;
 import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 
 
-public class MainActivity extends AppCompatActivity
+public class PlayActivity extends AppCompatActivity
 {
-    private static final int REQUEST_CODE_BASE = 1024;
-    private static final int REQUEST_CODE_PREFERENCES = 1024 + 1;
-
     private MainController mainController;
     private IEventDispatcher eventDispatcher;
     private Configuration configuration;
@@ -49,7 +44,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_play);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final StringResolver stringResolver = new StringResolver(getResources());
         eventDispatcher = new EventDispatcher();
@@ -76,7 +72,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void callback(Object param) {
                 ArrayList<String> lessons = (ArrayList<String>) param;
-                LessonsAdapter adapter = new LessonsAdapter(MainActivity.this, lessons, stringResolver);
+                LessonsAdapter adapter = new LessonsAdapter(PlayActivity.this, lessons, stringResolver);
                 listView.setAdapter(adapter);
                 listView.setItemChecked(school.getLesson(), true);
             }
@@ -128,20 +124,25 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_settings:
                 mainController.fire(MainController.Trigger.Stop, null);
                 buttonMusic.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_STOP);
-                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivityForResult(intent, MainActivity.REQUEST_CODE_PREFERENCES);
+                Intent intent = new Intent(PlayActivity.this, SettingsActivity.class);
+                startActivityForResult(intent, SettingsActivity.REQUEST_CODE_PREFERENCES);
                 return true;
-
+            case android.R.id.home:
+                mainController.fire(MainController.Trigger.Stop, null);
+                buttonMusic.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_STOP);
+                onBackPressed();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data)
     {
         switch(requestCode)
         {
-            case MainActivity.REQUEST_CODE_PREFERENCES:
+            case SettingsActivity.REQUEST_CODE_PREFERENCES:
                 loadConfiguration(configuration);
                 break;
         }

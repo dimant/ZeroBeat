@@ -20,4 +20,10 @@
     <string name="seekbar_wpm_message">Начните с количества слов в минуту, которую Вы хотите выполнить. Удержитесь от соблазна уменьшить их колличество, если Вы не сможете расшифровать каждый символ.Просто держите темп!</string>
     <string name="seekbar_wpm_unit">слов</string>
     <string name="seekbar_wpm_key">seekbar_wpm</string>
+
+    <string name="numberpicker_group_size_title">Group Size</string>
+    <string name="numberpicker_group_size_summary">Number of characters per group.</string>
+    <string name="numberpicker_group_size_message">Typical lessons are thaught at 5 characters per group. If you have trouble copy 5 characters at a time, reduce this number.</string>
+    <string name="numberpicker_group_size_unit">Chars</string>
+    <string name="numberpicker_group_size_key">numberpicker_group_size</string>
 </resources>

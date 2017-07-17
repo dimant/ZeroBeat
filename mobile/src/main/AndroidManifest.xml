@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".activities.MainActivity"
                   android:configChanges="orientation"
                   android:screenOrientation="portrait">
             <intent-filter>
@@ -20,26 +20,34 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SettingsActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activities.PlayActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
 
-        <!--<meta-data-->
-            <!--android:name="com.google.android.gms.car.application"-->
-            <!--android:resource="@xml/automotive_app_desc"/>-->
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.gms.car.application" -->
+        <!-- android:resource="@xml/automotive_app_desc"/> -->
         <!--
  Main music service, provides media browsing and media playback services to
          consumers through MediaBrowserService and MediaSession. Consumers connect to it through
          MediaBrowser (for browsing) and MediaController (for playback control)
         -->
-        <!--<service-->
-            <!--android:name=".ZeroBeatService"-->
-            <!--android:exported="true">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.media.browse.MediaBrowserService"/>-->
-            <!--</intent-filter>-->
-        <!--</service>-->
+        <!-- <service -->
+        <!-- android:name=".ZeroBeatService" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.media.browse.MediaBrowserService"/> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+
     </application>
 
 </manifest>

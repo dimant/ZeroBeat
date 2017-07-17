@@ -1,4 +1,4 @@
-package com.dtodorov.zerobeat;
+package com.dtodorov.zerobeat.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -11,11 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.dtodorov.zerobeat.R;
+
 import de.mrapp.android.preference.NumberPickerPreference;
 import de.mrapp.android.preference.SeekBarPreference;
 
 public class SettingsActivity extends AppCompatActivity
 {
+    public static final int REQUEST_CODE_PREFERENCES = 1024;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
