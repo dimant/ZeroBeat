@@ -5,8 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.dtodorov.zerobeat.Configuration;
 import com.dtodorov.zerobeat.R;
 import com.dtodorov.zerobeat.adapters.CardModel;
 import com.dtodorov.zerobeat.adapters.CardsAdapter;
@@ -23,13 +26,23 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         ListView lvCards = (ListView) findViewById(R.id.listview_courses);
-        CardsAdapter adapter = new CardsAdapter(this);
+        final CardsAdapter adapter = new CardsAdapter(this);
 
         lvCards.setAdapter(adapter);
         adapter.addAll(
-                new CardModel(R.mipmap.course_icon_1, R.string.cardview_beginner_title, R.string.cardview_beginner_summary),
-                new CardModel(R.mipmap.course_icon_2, R.string.cardview_intermediate_title, R.string.cardview_intermediate_summary),
-                new CardModel(R.mipmap.course_icon_3, R.string.cardview_advanced_title, R.string.cardview_advanced_summary));
+                new CardModel(R.mipmap.course_icon_1, R.string.cardview_beginner_title, R.string.cardview_beginner_summary, Configuration.Course.Beginner),
+                new CardModel(R.mipmap.course_icon_2, R.string.cardview_intermediate_title, R.string.cardview_intermediate_summary, Configuration.Course.Intermediate),
+                new CardModel(R.mipmap.course_icon_3, R.string.cardview_advanced_title, R.string.cardview_advanced_summary, Configuration.Course.Advanced));
+
+        lvCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CardModel model = adapter.getItem(position);
+                Intent intent = new Intent(MainActivity.this, PlayActivity.class);
+                intent.putExtra(PlayActivity.COURSE_LEVEL_KEY, model.getCourse().name());
+                startActivity(intent);
+            }
+        });
     }
 
 

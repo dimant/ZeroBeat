@@ -9,6 +9,13 @@ import com.dtodorov.zerobeat.teacher.ITeacherConfiguration;
 
 public class Configuration implements ISignalGeneratorConfiguration, ITeacherConfiguration
 {
+    public enum Course
+    {
+        Beginner,
+        Intermediate,
+        Advanced
+    }
+
     private int wpm;
     private int samplingRate;
     private int frequency;

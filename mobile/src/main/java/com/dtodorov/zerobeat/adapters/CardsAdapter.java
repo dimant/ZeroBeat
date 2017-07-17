@@ -22,6 +22,20 @@ public class CardsAdapter extends ArrayAdapter<CardModel>
         super(context, R.layout.item_course);
     }
 
+    static class ViewHolder
+    {
+        ImageView imageView;
+        TextView tvTitle;
+        TextView tvSubtitle;
+
+        ViewHolder(View view)
+        {
+            imageView = (ImageView) view.findViewById(R.id.item_course_image);
+            tvTitle = (TextView) view.findViewById(R.id.item_course_title);
+            tvSubtitle = (TextView) view.findViewById(R.id.item_course_summary);
+        }
+    }
+
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
@@ -48,19 +62,5 @@ public class CardsAdapter extends ArrayAdapter<CardModel>
         holder.tvSubtitle.setText(model.getSubtitle());
 
         return convertView;
-    }
-
-    static class ViewHolder
-    {
-        ImageView imageView;
-        TextView tvTitle;
-        TextView tvSubtitle;
-
-        ViewHolder(View view)
-        {
-            imageView = (ImageView) view.findViewById(R.id.item_course_image);
-            tvTitle = (TextView) view.findViewById(R.id.item_course_title);
-            tvSubtitle = (TextView) view.findViewById(R.id.item_course_summary);
-        }
     }
 }

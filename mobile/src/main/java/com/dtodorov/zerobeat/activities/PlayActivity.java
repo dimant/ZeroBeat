@@ -35,6 +35,8 @@ import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 
 public class PlayActivity extends AppCompatActivity
 {
+    public static final String COURSE_LEVEL_KEY = "courseLevelKey";
+
     private MainController mainController;
     private IEventDispatcher eventDispatcher;
     private Configuration configuration;
