@@ -25,9 +25,9 @@
                   android:screenOrientation="portrait">
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.car.application"
-            android:resource="@xml/automotive_app_desc"/>
+        <!--<meta-data-->
+            <!--android:name="com.google.android.gms.car.application"-->
+            <!--android:resource="@xml/automotive_app_desc"/>-->
         <!--
  Main music service, provides media browsing and media playback services to
          consumers through MediaBrowserService and MediaSession. Consumers connect to it through
