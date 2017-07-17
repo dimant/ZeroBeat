@@ -96,8 +96,6 @@ public class PlayActivity extends AppCompatActivity
 
     private void loadConfiguration(Configuration configuration)
     {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-
         int wpm = SettingsActivity.getWpm(this);
         configuration.setWpm(wpm);
 
