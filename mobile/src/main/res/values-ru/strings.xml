@@ -7,7 +7,7 @@
 
     <string name="attributions_title">Приписывание</string>
     <string name="attributions_summary">Третих лиц библиотеки.</string>
-    <string name="attributions_content">FloatingMusicActionButton от Tim Rijckaert (github); AndroidMaterialPreferences от Michael Rapp (github)</string>
+    <string name="attributions_content">Озвучивание от E3OF26S на voicebunny.com; FloatingMusicActionButton от Tim Rijckaert (github); AndroidMaterialPreferences от Michael Rapp (github)</string>
 
     <string name="seekbar_frequency_title">Звуковая Частота</string>
     <string name="seekbar_frequency_summary">Настройка боковой частоты.</string>

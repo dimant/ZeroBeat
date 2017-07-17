@@ -7,7 +7,7 @@
 
     <string name="attributions_title">Attributions</string>
     <string name="attributions_summary">3rd party libraries</string>
-    <string name="attributions_content">FloatingMusicActionButton by Tim Rijckaert (github); AndroidMaterialPreferences by Michael Rapp (github)</string>
+    <string name="attributions_content">Voice acting by E3OF26S on voicebunny.com; FloatingMusicActionButton by Tim Rijckaert (github); AndroidMaterialPreferences by Michael Rapp (github)</string>
 
     <string name="seekbar_frequency_title">Tone Frequency</string>
     <string name="seekbar_frequency_summary">Adjust the frequency of the side tone.</string>

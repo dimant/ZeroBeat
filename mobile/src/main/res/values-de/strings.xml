@@ -7,7 +7,7 @@
 
     <string name="attributions_title">Zuschreibung</string>
     <string name="attributions_summary">Bibliotheken von Dritten</string>
-    <string name="attributions_content">FloatingMusicActionButton von Tim Rijckaert (github); AndroidMaterialPreferences von Michael Rapp (github)</string>
+    <string name="attributions_content">Stimme von E3OF26S auf voicebunny.com; FloatingMusicActionButton von Tim Rijckaert (github); AndroidMaterialPreferences von Michael Rapp (github)</string>
 
     <string name="seekbar_frequency_title">Ton Frequenz</string>
     <string name="seekbar_frequency_summary">Einstellen der Frequenz des Seitentons.</string>
