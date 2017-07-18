@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity
 
         lvCards.setAdapter(adapter);
         adapter.addAll(
-                new CardModel(R.mipmap.course_icon_1, R.string.cardview_beginner_title, R.string.cardview_beginner_summary, Configuration.Course.Beginner),
-                new CardModel(R.mipmap.course_icon_2, R.string.cardview_intermediate_title, R.string.cardview_intermediate_summary, Configuration.Course.Intermediate),
-                new CardModel(R.mipmap.course_icon_3, R.string.cardview_advanced_title, R.string.cardview_advanced_summary, Configuration.Course.Advanced));
+                new CardModel(R.mipmap.telegraph_boy, R.string.cardview_beginner_title, R.string.cardview_beginner_summary, Configuration.Course.Beginner),
+                new CardModel(R.mipmap.telegraph_lesson, R.string.cardview_intermediate_title, R.string.cardview_intermediate_summary, Configuration.Course.Intermediate),
+                new CardModel(R.mipmap.marine_field_telegraph, R.string.cardview_advanced_title, R.string.cardview_advanced_summary, Configuration.Course.Advanced));
 
         lvCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
