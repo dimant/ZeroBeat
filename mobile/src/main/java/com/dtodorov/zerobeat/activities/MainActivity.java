@@ -13,9 +13,6 @@ import com.dtodorov.zerobeat.Configuration;
 import com.dtodorov.zerobeat.R;
 import com.dtodorov.zerobeat.adapters.CardModel;
 import com.dtodorov.zerobeat.adapters.CardsAdapter;
-import com.dtodorov.zerobeat.controllers.MainController;
-
-import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 
 public class MainActivity extends AppCompatActivity
 {

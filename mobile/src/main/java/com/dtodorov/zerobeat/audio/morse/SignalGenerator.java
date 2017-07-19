@@ -1,5 +1,7 @@
 package com.dtodorov.zerobeat.audio.morse;
 
+import com.dtodorov.zerobeat.Configuration;
+
 /**
  * Created by diman on 7/8/2017.
  */
@@ -32,12 +34,12 @@ public class SignalGenerator implements ISignalGenerator
 
     public int getDotSamples()
     {
-        return (int) Math.round(configuration.getSamplingRate() * getDotDuration() / 1000);
+        return (int) Math.round(Configuration.SAMPLING_RATE * getDotDuration() / 1000);
     }
 
     public int getDashSamples()
     {
-        return (int) Math.round(configuration.getSamplingRate() * getDashDuration() / 1000);
+        return (int) Math.round(Configuration.SAMPLING_RATE * getDashDuration() / 1000);
     }
 
     public void setBuffer(short[] buffer)
@@ -59,9 +61,9 @@ public class SignalGenerator implements ISignalGenerator
 
         for(i = 0; i < samples; i++)
         {
-            sample = (short)(Math.sin(2 * Math.PI * i / (configuration.getSamplingRate() / configuration.getFrequency())) * 0x7FFF);
+            sample = (short)(Math.sin(2 * Math.PI * i / (Configuration.SAMPLING_RATE / configuration.getFrequency())) * 0x7FFF);
 
-            for(j = 0; j < configuration.getChannels(); j++)
+            for(j = 0; j < Configuration.CHANNELS; j++)
             {
                 if(data != null)
                     data[offset] = sample;
@@ -78,7 +80,7 @@ public class SignalGenerator implements ISignalGenerator
 
         for(i = 0; i < samples; i++)
         {
-            for(j = 0; j < configuration.getChannels(); j++)
+            for(j = 0; j < Configuration.CHANNELS; j++)
             {
                 if(data != null)
                     data[offset] = sample;

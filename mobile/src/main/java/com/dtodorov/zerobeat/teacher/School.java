@@ -21,27 +21,24 @@ public class School implements ISchool
     private Teacher teacher;
     private MorseTracker morseTracker;
     private PhoneticTracker phoneticTracker;
-    private Configuration configuration;
     private int lesson;
 
     public School(
             Lessons lessons,
             Teacher teacher,
             MorseTracker morseTracker,
-            PhoneticTracker phoneticTracker,
-            Configuration configuration
+            PhoneticTracker phoneticTracker
     )
     {
         this.lessons = lessons;
         this.teacher = teacher;
         this.morseTracker = morseTracker;
         this.phoneticTracker = phoneticTracker;
-        this.configuration = configuration;
 
-        int count = configuration.getSamplingRate() * 60 / configuration.getWpm(); // enough space for one PARIS
+        int count = Configuration.SAMPLING_RATE * Configuration.CHANNELS * 60 / 10; // enough space for one PARIS at 10wpm
         track = new AudioTrack(
                 AudioManager.STREAM_MUSIC,
-                configuration.getSamplingRate(),
+                Configuration.SAMPLING_RATE,
                 AudioFormat.CHANNEL_OUT_MONO,
                 AudioFormat.ENCODING_PCM_16BIT,
                 count * (Short.SIZE / 8),
@@ -78,12 +75,9 @@ public class School implements ISchool
     }
 
     @Override
-    public void pause()
+    public boolean isPlaying()
     {
-        if(track.getPlayState() == AudioTrack.PLAYSTATE_PLAYING)
-        {
-            track.pause();
-        }
+        return track.getPlayState() == AudioTrack.PLAYSTATE_PLAYING;
     }
 
     @Override

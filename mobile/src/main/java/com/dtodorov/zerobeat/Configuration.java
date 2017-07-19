@@ -1,5 +1,11 @@
 package com.dtodorov.zerobeat;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import com.dtodorov.zerobeat.activities.SettingsActivity;
 import com.dtodorov.zerobeat.audio.morse.ISignalGeneratorConfiguration;
 import com.dtodorov.zerobeat.teacher.ITeacherConfiguration;
 
@@ -9,6 +15,9 @@ import com.dtodorov.zerobeat.teacher.ITeacherConfiguration;
 
 public class Configuration implements ISignalGeneratorConfiguration, ITeacherConfiguration
 {
+    public static final int SAMPLING_RATE = 44100;
+    public static final int CHANNELS = 1;
+
     public enum Course
     {
         Beginner,
@@ -21,31 +30,6 @@ public class Configuration implements ISignalGeneratorConfiguration, ITeacherCon
     private int frequency;
     private int groupSize;
     private int channels;
-
-    public void setWpm(int wpm)
-    {
-        this.wpm = wpm;
-    }
-
-    public void setSamplingRate(int samplingRate)
-    {
-        this.samplingRate = samplingRate;
-    }
-
-    public void setFrequency(int frequency)
-    {
-        this.frequency = frequency;
-    }
-
-    public void setGroupSize(int groupSize)
-    {
-        this.groupSize = groupSize;
-    }
-
-    public void setChannels(int channels)
-    {
-        this.channels = channels;
-    }
 
     @Override
     public int getGroupSize()
@@ -60,20 +44,19 @@ public class Configuration implements ISignalGeneratorConfiguration, ITeacherCon
     }
 
     @Override
-    public int getSamplingRate()
-    {
-        return samplingRate;
-    }
-
-    @Override
     public int getFrequency()
     {
         return frequency;
     }
 
-    @Override
-    public int getChannels()
+    public void loadConfiguration(Application context)
     {
-        return channels;
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+
+        wpm = Math.round(sharedPref.getFloat(context.getString(R.string.seekbar_wpm_key), 15));
+
+        frequency = Math.round(sharedPref.getFloat(context.getString(R.string.seekbar_frequency_key), 701));
+
+        groupSize = sharedPref.getInt(context.getString(R.string.numberpicker_group_size_key), 5);
     }
 }

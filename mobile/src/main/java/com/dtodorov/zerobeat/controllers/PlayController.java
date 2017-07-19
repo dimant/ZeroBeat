@@ -3,6 +3,7 @@ package com.dtodorov.zerobeat.controllers;
 import com.dtodorov.androlib.eventdispatcher.IEventDispatcher;
 import com.dtodorov.androlib.eventdispatcher.IEventListener;
 import com.dtodorov.androlib.services.IStringResolver;
+import com.dtodorov.zerobeat.activities.PlayActivity;
 import com.dtodorov.zerobeat.teacher.ISchool;
 import com.github.oxo42.stateless4j.StateMachine;
 import com.github.oxo42.stateless4j.delegates.Action;
@@ -11,7 +12,7 @@ import com.github.oxo42.stateless4j.delegates.Action;
  * Created by diman on 7/8/2017.
  */
 
-public class MainController
+public class PlayController
 {
     public static final String ShowLessons = "showLessons";
     public static final String ChangeLesson = "changeLesson";
@@ -29,24 +30,23 @@ public class MainController
     };
 
     private StateMachine<State, Trigger> stateMachine;
-    private Object triggerParam;
     private ISchool school;
+    private IEventDispatcher eventDispatcher;
     private Thread schoolThread;
-    private int lessonIndex;
 
-    public MainController(
-            IStringResolver stringResolver,
+    public PlayController(
             final IEventDispatcher eventDispatcher,
             final ISchool school)
     {
-        this.stateMachine = new StateMachine<State, Trigger>(State.Idle);
+        this.eventDispatcher = eventDispatcher;
+        this.stateMachine = new StateMachine<>(State.Idle);
         this.school = school;
 
         Action homeAction = new Action() {
             @Override
             public void doIt()
             {
-                eventDispatcher.emit(MainController.ShowLessons, school.getLessons());
+                eventDispatcher.emit(PlayController.ShowLessons, school.getLessons());
                 if(schoolThread != null && schoolThread.isAlive())
                 {
                     schoolThread.interrupt();
@@ -81,7 +81,7 @@ public class MainController
 
         homeAction.doIt();
 
-        eventDispatcher.register(MainController.ChangeLesson, new IEventListener()
+        eventDispatcher.register(PlayController.ChangeLesson, new IEventListener()
         {
             @Override
             public void callback(Object param)
@@ -93,8 +93,7 @@ public class MainController
                     school.stop();
                     play = true;
                 }
-                lessonIndex = (Integer) param;
-                school.setLesson(lessonIndex);
+                school.setLesson((Integer) param);
                 if(play)
                 {
                     school.play();
@@ -105,8 +104,22 @@ public class MainController
         });
     }
 
-    public void fire(Trigger trigger, Object triggerParam) {
-        this.triggerParam = triggerParam;
+    public int getLesson()
+    {
+        return school.getLesson();
+    }
+
+    public boolean isPlaying()
+    {
+        return school.isPlaying();
+    }
+
+    public void showLessons()
+    {
+        eventDispatcher.emit(PlayController.ShowLessons, school.getLessons());
+    }
+
+    public void fire(Trigger trigger) {
         if(stateMachine.canFire(trigger)) {
             stateMachine.fire(trigger);
         }

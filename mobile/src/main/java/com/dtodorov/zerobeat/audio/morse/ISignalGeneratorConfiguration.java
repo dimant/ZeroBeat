@@ -7,7 +7,5 @@ package com.dtodorov.zerobeat.audio.morse;
 public interface ISignalGeneratorConfiguration
 {
     int getWpm();
-    int getSamplingRate();
     int getFrequency();
-    int getChannels();
 }
