@@ -26,7 +26,7 @@
 
             <TextView
                 android:id="@+id/item_course_title"
-                android:textColor="#ffffff"
+                android:textColor="@color/secondary_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -43,7 +43,7 @@
 
             <TextView
                 android:id="@+id/item_course_summary"
-                android:textColor="#ffffff"
+                android:textColor="@color/secondary_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
