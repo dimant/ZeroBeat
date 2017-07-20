@@ -11,9 +11,9 @@ public class CardModel
     private int imageId;
     private int titleId;
     private int subtitleId;
-    private Configuration.Course course;
+    private Configuration.CourseLevel course;
 
-    public CardModel(int imageId, int titleId, int subtitleId, Configuration.Course course)
+    public CardModel(int imageId, int titleId, int subtitleId, Configuration.CourseLevel course)
     {
         this.imageId = imageId;
         this.titleId = titleId;
@@ -36,7 +36,7 @@ public class CardModel
         return subtitleId;
     }
 
-    public Configuration.Course getCourse()
+    public Configuration.CourseLevel getCourseLevel()
     {
         return course;
     }

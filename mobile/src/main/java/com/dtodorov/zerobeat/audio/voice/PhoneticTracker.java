@@ -2,7 +2,9 @@ package com.dtodorov.zerobeat.audio.voice;
 
 import android.content.res.Resources;
 
+import com.dtodorov.zerobeat.Configuration;
 import com.dtodorov.zerobeat.R;
+import com.dtodorov.zerobeat.audio.morse.SignalGenerator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,6 +68,24 @@ public class PhoneticTracker
         resourceMap.put('/', R.raw.slash);
     }
 
+    public void writeSilence(int ms)
+    {
+        long samples = ms * (Configuration.SAMPLING_RATE / 1000);
+        int i;
+        int j;
+        byte sample = 0; // silence
+
+        for(i = 0; i < samples; i++)
+        {
+            for(j = 0; j < Configuration.CHANNELS; j++)
+            {
+                if(buffer != null)
+                    buffer[offset] = sample;
+                offset++;
+            }
+        }
+    }
+
     public void readResource(int resource)
     {
         try
@@ -94,21 +114,24 @@ public class PhoneticTracker
             {
                 int r = resourceMap.get(c);
                 readResource(r);
+                writeSilence(100);
             }
         }
     }
 
-    public byte[] track(String text)
+    public byte[] track(String text, int trailingSilenceMs)
     {
         char[] chars = text.toCharArray();
 
         this.buffer = null;
         this.offset = 0;
         encode(chars);
+        writeSilence(trailingSilenceMs);
 
         this.buffer = new byte[offset];
         this.offset = 0;
         encode(chars);
+        writeSilence(trailingSilenceMs);
 
         return buffer;
     }

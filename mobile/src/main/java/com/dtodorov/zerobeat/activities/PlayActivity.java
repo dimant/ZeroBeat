@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 
-
 public class PlayActivity extends AppCompatActivity
 {
     public static final String COURSE_LEVEL_KEY = "courseLevelKey";
@@ -39,6 +38,9 @@ public class PlayActivity extends AppCompatActivity
 
         app = (ZeroBeatApplication) getApplication();
         app.getConfiguration().loadConfiguration(app);
+
+        Intent intent = getIntent();
+        app.getConfiguration().setCourseLevel(intent.getStringExtra(PlayActivity.COURSE_LEVEL_KEY));
 
         final IEventDispatcher eventDispatcher = app.getEventDispatcher();
         final PlayController playController = app.getPlayController();

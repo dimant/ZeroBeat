@@ -9,4 +9,6 @@ interface ITeacher
     String intro(String lesson);
 
     String group(String lesson);
+
+    String repeatedSymbol(String lesson);
 }

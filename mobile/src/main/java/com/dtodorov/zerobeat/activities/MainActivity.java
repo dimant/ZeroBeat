@@ -1,6 +1,8 @@
 package com.dtodorov.zerobeat.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,16 +29,16 @@ public class MainActivity extends AppCompatActivity
 
         lvCards.setAdapter(adapter);
         adapter.addAll(
-                new CardModel(R.mipmap.telegraph_boy, R.string.cardview_beginner_title, R.string.cardview_beginner_summary, Configuration.Course.Beginner),
-                new CardModel(R.mipmap.telegraph_lesson, R.string.cardview_intermediate_title, R.string.cardview_intermediate_summary, Configuration.Course.Intermediate),
-                new CardModel(R.mipmap.marine_field_telegraph, R.string.cardview_advanced_title, R.string.cardview_advanced_summary, Configuration.Course.Advanced));
+                new CardModel(R.mipmap.telegraph_boy, R.string.cardview_beginner_title, R.string.cardview_beginner_summary, Configuration.CourseLevel.Beginner),
+                new CardModel(R.mipmap.telegraph_lesson, R.string.cardview_intermediate_title, R.string.cardview_intermediate_summary, Configuration.CourseLevel.Intermediate),
+                new CardModel(R.mipmap.marine_field_telegraph, R.string.cardview_advanced_title, R.string.cardview_advanced_summary, Configuration.CourseLevel.Advanced));
 
         lvCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CardModel model = adapter.getItem(position);
                 Intent intent = new Intent(MainActivity.this, PlayActivity.class);
-                intent.putExtra(PlayActivity.COURSE_LEVEL_KEY, model.getCourse().name());
+                intent.putExtra(PlayActivity.COURSE_LEVEL_KEY, model.getCourseLevel().name());
                 startActivity(intent);
             }
         });

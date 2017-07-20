@@ -13,17 +13,14 @@
     <string name="seekbar_frequency_summary">Einstellen der Frequenz des Seitentons.</string>
     <string name="seekbar_frequency_message">Üblicherweise zwischen 700 und 800 Hertz. Stellen Sie die Frequenz ein wenn Sie Schwierigkeiten haben die Buchstaben zu erkennen oder wenn Sie auffrischen wollen.</string>
     <string name="seekbar_frequency_unit">Hertz</string>
-    <string name="seekbar_frequency_key">seekbar_frequency</string>
 
     <string name="seekbar_wpm_title">Worte pro Minute</string>
     <string name="seekbar_wpm_summary">Einstellung der Sendegeschwindigkeit.</string>
     <string name="seekbar_wpm_message">Beginnen Sie mit der Geschwindigkeit die Sie erreichen wollen. Widerstehen Sie der Versuchung eine niedrigere Geschwindigkeit zu wählen wenn Sie nicht jeden Buchstaben erkennen, einfach weiter üben!</string>
     <string name="seekbar_wpm_unit">WpM</string>
-    <string name="seekbar_wpm_key">seekbar_wpm</string>
 
     <string name="numberpicker_group_size_title">Gruppengröße</string>
     <string name="numberpicker_group_size_summary">Anzahl an Zeichen pro Gruppe.</string>
     <string name="numberpicker_group_size_message">Üblicherweise wird in Gruppen je 5 Zeichen unterrichted. Wenn Sie schwierigkeiten haben 5 Buchstaben auf einmal zu lesen, probieren Sie die Größe zu verringern.</string>
     <string name="numberpicker_group_size_unit">Zeichen</string>
-    <string name="numberpicker_group_size_key">numberpicker_group_size</string>
 </resources>

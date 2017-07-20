@@ -22,18 +22,21 @@ public class School implements ISchool
     private MorseTracker morseTracker;
     private PhoneticTracker phoneticTracker;
     private int lesson;
+    private Configuration configuration;
 
     public School(
             Lessons lessons,
             Teacher teacher,
             MorseTracker morseTracker,
-            PhoneticTracker phoneticTracker
+            PhoneticTracker phoneticTracker,
+            Configuration configuration
     )
     {
         this.lessons = lessons;
         this.teacher = teacher;
         this.morseTracker = morseTracker;
         this.phoneticTracker = phoneticTracker;
+        this.configuration = configuration;
 
         int count = Configuration.SAMPLING_RATE * Configuration.CHANNELS * 60 / 10; // enough space for one PARIS at 10wpm
         track = new AudioTrack(
@@ -89,8 +92,42 @@ public class School implements ISchool
         }
     }
 
-    @Override
-    public void run()
+    public void beginnerLesson()
+    {
+        String group;
+        short[] sbuffer;
+        byte[] bbuffer;
+
+        while(true)
+        {
+            // get lesson
+            group = teacher.repeatedSymbol(lessons.getLesson(lesson));
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            // spell in morse
+            sbuffer = morseTracker.track(group);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            track.write(sbuffer, 0, sbuffer.length);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            // spell phonetically
+            bbuffer = phoneticTracker.track(group.substring(0, 1), 400);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            track.write(bbuffer, 0, bbuffer.length);
+            if(Thread.currentThread().isInterrupted())
+                return;
+        }
+
+    }
+
+
+    public void intermediateLesson()
     {
         String group;
         short[] sbuffer;
@@ -108,7 +145,7 @@ public class School implements ISchool
         if(Thread.currentThread().isInterrupted())
             return;
 
-        bbuffer = phoneticTracker.track(group);
+        bbuffer = phoneticTracker.track(group, 500);
         if(Thread.currentThread().isInterrupted())
             return;
 
@@ -130,13 +167,66 @@ public class School implements ISchool
             if(Thread.currentThread().isInterrupted())
                 return;
 
-            bbuffer = phoneticTracker.track(group);
+            bbuffer = phoneticTracker.track(group, 250);
             if(Thread.currentThread().isInterrupted())
                 return;
 
             track.write(bbuffer, 0, bbuffer.length);
             if(Thread.currentThread().isInterrupted())
                 return;
+        }
+    }
+
+    public void advancedLesson()
+    {
+        String group;
+        short[] sbuffer;
+        byte[] bbuffer;
+
+        group = teacher.intro(lessons.getLesson(lesson));
+        if(Thread.currentThread().isInterrupted())
+            return;
+
+        sbuffer = morseTracker.track(group);
+        if(Thread.currentThread().isInterrupted())
+            return;
+
+        track.write(sbuffer, 0, sbuffer.length);
+        if(Thread.currentThread().isInterrupted())
+            return;
+
+        while(true)
+        {
+            group = teacher.group(lessons.getLesson(lesson));
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            sbuffer = morseTracker.track(group);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            track.write(sbuffer, 0, sbuffer.length);
+            if(Thread.currentThread().isInterrupted())
+                return;
+        }
+    }
+
+    @Override
+    public void run()
+    {
+        switch(configuration.getCourseLevel())
+        {
+            case Beginner:
+                beginnerLesson();
+                break;
+            case Intermediate:
+                intermediateLesson();
+                break;
+            case Advanced:
+                advancedLesson();
+                break;
+            default:
+                break;
         }
     }
 }

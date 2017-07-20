@@ -20,13 +20,13 @@ public class Teacher implements ITeacher
     @Override
     public String intro(String lesson)
     {
-        return Stringer.join(lesson.toCharArray(), " ");
+        return Stringer.join(lesson.toCharArray(), " ") + " ";
     }
 
     @Override
     public String group(String lesson)
     {
-        int i, idx;
+        int i;
         StringBuilder builder = new StringBuilder(configuration.getGroupSize() + 1);
 
         for(i = 0; i < configuration.getGroupSize(); i++)
@@ -35,6 +35,22 @@ public class Teacher implements ITeacher
                     lesson.charAt(
                             rng.nextInt(lesson.length() - 1)));
 
+        }
+        builder.append(' ');
+
+        return builder.toString();
+    }
+
+    @Override
+    public String repeatedSymbol(String lesson)
+    {
+        int i, idx;
+        StringBuilder builder = new StringBuilder(configuration.getGroupSize() + 1);
+
+        idx = rng.nextInt(lesson.length() - 1);
+        for(i = 0; i < configuration.getGroupSize(); i++)
+        {
+            builder.append(lesson.charAt(idx));
         }
         builder.append(' ');
 

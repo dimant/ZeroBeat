@@ -75,6 +75,7 @@ public class ZeroBeatApplication extends Application
                         new Lessons(),
                         new Teacher(configuration),
                         new MorseTracker(new SignalGenerator(configuration)),
-                        new PhoneticTracker(getResources())));
+                        new PhoneticTracker(getResources()),
+                        configuration));
     }
 }
