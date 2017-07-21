@@ -52,8 +52,10 @@ public class SettingsActivity extends AppCompatActivity
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
 
+
             ZeroBeatApplication app = (ZeroBeatApplication) getActivity().getApplication();
             Configuration configuration = app.getConfiguration();
+            configuration.loadConfiguration(app);
 
             SeekBarPreference wpmPreference =
                     (SeekBarPreference) findPreference(getString(R.string.seekbar_wpm_key));
