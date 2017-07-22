@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.ToggleButton;
 
 import com.dtodorov.androlib.eventdispatcher.IEventDispatcher;
 import com.dtodorov.androlib.eventdispatcher.IEventListener;
@@ -24,6 +26,7 @@ public class PlayActivity extends AppCompatActivity
     public static final String COURSE_LEVEL_KEY = "courseLevelKey";
 
     private ZeroBeatApplication app;
+    private ToggleButton buttonMusic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,7 +63,23 @@ public class PlayActivity extends AppCompatActivity
         });
         playController.showLessons();
 
-//                playController.fire(PlayController.Trigger.Play);
+        buttonMusic = (ToggleButton) findViewById(R.id.button_music);
+        buttonMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if(isChecked)
+                {
+                    playController.fire(PlayController.Trigger.Play);
+                }
+                else
+                {
+                    playController.fire(PlayController.Trigger.Stop);
+                }
+            }
+        });
+        buttonMusic.setChecked(false);
     }
 
     @Override
@@ -74,11 +93,13 @@ public class PlayActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.action_settings:
                 app.getPlayController().fire(PlayController.Trigger.Stop);
+                buttonMusic.setChecked(false);
                 Intent intent = new Intent(PlayActivity.this, SettingsActivity.class);
                 startActivityForResult(intent, SettingsActivity.REQUEST_CODE_PREFERENCES);
                 return true;
             case android.R.id.home:
                 app.getPlayController().fire(PlayController.Trigger.Stop);
+                buttonMusic.setChecked(false);
                 onBackPressed();
                 return true;
             default:
