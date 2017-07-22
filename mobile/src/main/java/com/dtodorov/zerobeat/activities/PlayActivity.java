@@ -69,17 +69,19 @@ public class PlayActivity extends AppCompatActivity
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
-                if(isChecked)
+                if(buttonMusic.isPressed())
                 {
-                    playController.fire(PlayController.Trigger.Play);
-                }
-                else
-                {
-                    playController.fire(PlayController.Trigger.Stop);
+                    if(isChecked)
+                    {
+                        playController.fire(PlayController.Trigger.Play);
+                    }
+                    else
+                    {
+                        playController.fire(PlayController.Trigger.Stop);
+                    }
                 }
             }
         });
-        buttonMusic.setChecked(false);
     }
 
     @Override
