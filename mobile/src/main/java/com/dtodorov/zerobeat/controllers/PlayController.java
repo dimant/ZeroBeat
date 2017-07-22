@@ -4,9 +4,12 @@ import com.dtodorov.androlib.eventdispatcher.IEventDispatcher;
 import com.dtodorov.androlib.eventdispatcher.IEventListener;
 import com.dtodorov.androlib.services.IStringResolver;
 import com.dtodorov.zerobeat.activities.PlayActivity;
+import com.dtodorov.zerobeat.models.LessonModel;
 import com.dtodorov.zerobeat.teacher.ISchool;
 import com.github.oxo42.stateless4j.StateMachine;
 import com.github.oxo42.stateless4j.delegates.Action;
+
+import java.util.ArrayList;
 
 /**
  * Created by diman on 7/8/2017.

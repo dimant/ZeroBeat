@@ -1,8 +1,6 @@
 package com.dtodorov.zerobeat.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +11,7 @@ import android.widget.ListView;
 
 import com.dtodorov.zerobeat.Configuration;
 import com.dtodorov.zerobeat.R;
-import com.dtodorov.zerobeat.adapters.CardModel;
+import com.dtodorov.zerobeat.models.CardModel;
 import com.dtodorov.zerobeat.adapters.CardsAdapter;
 
 public class MainActivity extends AppCompatActivity

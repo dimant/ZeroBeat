@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dtodorov.zerobeat.R;
+import com.dtodorov.zerobeat.models.CardModel;
 
 /**
  * Created by diman on 7/16/2017.
@@ -22,7 +23,7 @@ public class CardsAdapter extends ArrayAdapter<CardModel>
         super(context, R.layout.item_course);
     }
 
-    static class ViewHolder
+    private class ViewHolder
     {
         ImageView imageView;
         TextView tvTitle;

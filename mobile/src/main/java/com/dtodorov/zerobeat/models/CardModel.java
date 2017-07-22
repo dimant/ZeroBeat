@@ -1,4 +1,4 @@
-package com.dtodorov.zerobeat.adapters;
+package com.dtodorov.zerobeat.models;
 
 import com.dtodorov.zerobeat.Configuration;
 

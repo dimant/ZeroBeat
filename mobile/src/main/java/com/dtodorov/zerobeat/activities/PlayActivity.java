@@ -14,6 +14,7 @@ import com.dtodorov.androlib.eventdispatcher.IEventListener;
 import com.dtodorov.zerobeat.R;
 import com.dtodorov.zerobeat.ZeroBeatApplication;
 import com.dtodorov.zerobeat.adapters.LessonsAdapter;
+import com.dtodorov.zerobeat.models.LessonModel;
 import com.dtodorov.zerobeat.controllers.PlayController;
 
 import org.jetbrains.annotations.NotNull;
@@ -56,7 +57,7 @@ public class PlayActivity extends AppCompatActivity
         eventDispatcher.register(PlayController.ShowLessons, new IEventListener() {
             @Override
             public void callback(Object param) {
-                ArrayList<String> lessons = (ArrayList<String>) param;
+                ArrayList<LessonModel> lessons = (ArrayList<LessonModel>) param;
                 LessonsAdapter adapter = new LessonsAdapter(PlayActivity.this, lessons, app.getStringResolver());
                 listView.setAdapter(adapter);
                 listView.setItemChecked(playController.getLesson(), true);

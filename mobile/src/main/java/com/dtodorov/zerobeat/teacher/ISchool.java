@@ -1,5 +1,7 @@
 package com.dtodorov.zerobeat.teacher;
 
+import com.dtodorov.zerobeat.models.LessonModel;
+
 import java.util.ArrayList;
 
 /**
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 
 public interface ISchool extends Runnable
 {
-    ArrayList<String> getLessons();
+    ArrayList<LessonModel> getLessons();
 
     void setLesson(int lesson);
 

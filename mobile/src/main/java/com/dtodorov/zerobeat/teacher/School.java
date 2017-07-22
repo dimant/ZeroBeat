@@ -7,7 +7,9 @@ import android.media.AudioTrack;
 import com.dtodorov.zerobeat.Configuration;
 import com.dtodorov.zerobeat.audio.morse.MorseTracker;
 import com.dtodorov.zerobeat.audio.voice.PhoneticTracker;
+import com.dtodorov.zerobeat.models.LessonModel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -49,9 +51,18 @@ public class School implements ISchool
     }
 
     @Override
-    public ArrayList<String> getLessons()
+    public ArrayList<LessonModel> getLessons()
     {
-        return lessons.getLessons();
+        ArrayList<LessonModel> models = new ArrayList<>();
+
+        for(String lesson : lessons.getLessons())
+        {
+            LessonModel model = new LessonModel();
+            model.lessonDescription = lesson;
+            models.add(model);
+        }
+        
+        return models;
     }
 
     @Override
