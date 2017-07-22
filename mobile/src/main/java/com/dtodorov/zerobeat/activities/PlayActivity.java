@@ -17,18 +17,13 @@ import com.dtodorov.zerobeat.adapters.LessonsAdapter;
 import com.dtodorov.zerobeat.models.LessonModel;
 import com.dtodorov.zerobeat.controllers.PlayController;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
-
-import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 
 public class PlayActivity extends AppCompatActivity
 {
     public static final String COURSE_LEVEL_KEY = "courseLevelKey";
 
     private ZeroBeatApplication app;
-    private FloatingMusicActionButton buttonMusic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -65,25 +60,7 @@ public class PlayActivity extends AppCompatActivity
         });
         playController.showLessons();
 
-        buttonMusic = (FloatingMusicActionButton) findViewById(R.id.button_music);
-        buttonMusic.setOnMusicFabClickListener(new FloatingMusicActionButton.OnMusicFabClickListener()
-        {
-            @Override
-            public void onClick(@NotNull View view)
-            {
-                playController.fire(PlayController.Trigger.Play);
-            }
-        });
-
-        boolean isPlaying = playController.isPlaying();
-        if(isPlaying && buttonMusic.getCurrentMode() != FloatingMusicActionButton.Mode.STOP_TO_PLAY)
-        {
-            buttonMusic.changeMode(FloatingMusicActionButton.Mode.STOP_TO_PLAY);
-        }
-        else if(buttonMusic.getCurrentMode() != FloatingMusicActionButton.Mode.PLAY_TO_STOP)
-        {
-            buttonMusic.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_STOP);
-        }
+//                playController.fire(PlayController.Trigger.Play);
     }
 
     @Override
@@ -97,13 +74,11 @@ public class PlayActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.action_settings:
                 app.getPlayController().fire(PlayController.Trigger.Stop);
-                buttonMusic.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_STOP);
                 Intent intent = new Intent(PlayActivity.this, SettingsActivity.class);
                 startActivityForResult(intent, SettingsActivity.REQUEST_CODE_PREFERENCES);
                 return true;
             case android.R.id.home:
                 app.getPlayController().fire(PlayController.Trigger.Stop);
-                buttonMusic.changeMode(FloatingMusicActionButton.Mode.PLAY_TO_STOP);
                 onBackPressed();
                 return true;
             default:

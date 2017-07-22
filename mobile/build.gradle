@@ -33,7 +33,6 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
-    compile 'com.github.timrijckaert:FloatingMusicActionButton:v2.0.4'
     compile 'com.github.michael-rapp:android-material-preferences:3.0.1'
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'

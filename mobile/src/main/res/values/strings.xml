@@ -5,6 +5,8 @@
     <string name="play">Play</string>
     <string name="pause">Pause</string>
 
+    <string name="action_settings">Settings</string>
+
     <string name="attributions_title">Attributions</string>
     <string name="attributions_summary">3rd party libraries</string>
     <string name="attributions_content">Voice acting by E3OF26S on voicebunny.com; FloatingMusicActionButton by Tim Rijckaert (github); AndroidMaterialPreferences by Michael Rapp (github)</string>
@@ -36,4 +38,20 @@
     <string name="cardview_advanced_title">Advanced</string>
     <string name="cardview_advanced_summary">Learn symbols by listening only to morse.</string>
 
+    <!-- Play Icon -->
+    <string name="play_icon_upper_path_data">M 44 32 L 44 64 L 100 64 L 100 64 Z</string>
+    <string name="play_icon_bottom_path_data">M 44 96 L 44 64 L 100 64 L 100 64 Z</string>
+
+    <!-- Stop Icon -->
+    <string name="stop_icon_upper_path_data">M 32 32 L 32 64 L 96 64 L 96 32 Z</string>
+    <string name="stop_icon_bottom_path_data">M 32 96 L 32 64 L 96 64 L 96 96 Z</string>
+
+    <!-- Groups -->
+    <string name="play_icon_group_top">upperpart</string>
+    <string name="play_icon_group_bottom">bottompart</string>
+    <string name="play_icon_group_parts">parts</string>
+
+    <!-- Path Name -->
+    <string name="play_icon_top_path_name">upper</string>
+    <string name="play_icon_bottom_path_name">bottom</string>
 </resources>
