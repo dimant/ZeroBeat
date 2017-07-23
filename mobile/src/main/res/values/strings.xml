@@ -9,7 +9,7 @@
 
     <string name="attributions_title">Attributions</string>
     <string name="attributions_summary">3rd party libraries</string>
-    <string name="attributions_content">Voice acting by E3OF26S on voicebunny.com; FloatingMusicActionButton by Tim Rijckaert (github); AndroidMaterialPreferences by Michael Rapp (github)</string>
+    <string name="attributions_content">Voice acting by E3OF26S on voicebunny.com; AndroidMaterialPreferences by Michael Rapp (github)</string>
 
     <string name="seekbar_frequency_title">Tone Frequency</string>
     <string name="seekbar_frequency_summary">Adjust the frequency of the side tone.</string>
@@ -43,8 +43,6 @@
 
     <string name="cardview_advanced_title">Advanced</string>
     <string name="cardview_advanced_summary">Learn symbols by listening only to morse.</string>
-
-
 
     <!-- Play Icon -->
     <string name="play_icon_upper_path_data">M 44 32 L 44 64 L 100 64 L 100 64 Z</string>
