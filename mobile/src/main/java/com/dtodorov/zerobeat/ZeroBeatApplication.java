@@ -73,6 +73,7 @@ public class ZeroBeatApplication extends Application
                 eventDispatcher,
                 new School(
                         new Lessons(),
+                        getResources().obtainTypedArray(R.array.lesson_titles),
                         new Teacher(configuration),
                         new MorseTracker(new SignalGenerator(configuration)),
                         new PhoneticTracker(getResources()),

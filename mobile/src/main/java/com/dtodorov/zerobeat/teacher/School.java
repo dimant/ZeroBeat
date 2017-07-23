@@ -1,10 +1,12 @@
 package com.dtodorov.zerobeat.teacher;
 
+import android.content.res.TypedArray;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 
 import com.dtodorov.zerobeat.Configuration;
+import com.dtodorov.zerobeat.R;
 import com.dtodorov.zerobeat.audio.morse.MorseTracker;
 import com.dtodorov.zerobeat.audio.voice.PhoneticTracker;
 import com.dtodorov.zerobeat.models.LessonModel;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 public class School implements ISchool
 {
     private final AudioTrack track;
+    private final TypedArray lessonTitles;
     private Lessons lessons;
     private Teacher teacher;
     private MorseTracker morseTracker;
@@ -28,6 +31,7 @@ public class School implements ISchool
 
     public School(
             Lessons lessons,
+            TypedArray lessonTitles,
             Teacher teacher,
             MorseTracker morseTracker,
             PhoneticTracker phoneticTracker,
@@ -35,6 +39,7 @@ public class School implements ISchool
     )
     {
         this.lessons = lessons;
+        this.lessonTitles = lessonTitles;
         this.teacher = teacher;
         this.morseTracker = morseTracker;
         this.phoneticTracker = phoneticTracker;
@@ -54,14 +59,16 @@ public class School implements ISchool
     public ArrayList<LessonModel> getLessons()
     {
         ArrayList<LessonModel> models = new ArrayList<>();
+        ArrayList<String> strLessons = lessons.getLessons();
 
-        for(String lesson : lessons.getLessons())
+        for(int i = 0; i < strLessons.size(); i++)
         {
             LessonModel model = new LessonModel();
-            model.lessonDescription = lesson;
+            model.title = lessonTitles.getString(i);
+            model.description = strLessons.get(i);
             models.add(model);
         }
-        
+
         return models;
     }
 

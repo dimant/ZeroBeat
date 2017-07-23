@@ -6,5 +6,6 @@ package com.dtodorov.zerobeat.models;
 
 public class LessonModel
 {
-    public String lessonDescription;
+    public String title;
+    public String description;
 }

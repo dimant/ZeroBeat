@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lesson_titles">
+        <item>Telegraph Boy</item>
+        <item>Lend Me Your Ears</item>
+        <item>Communication Breakdown</item>
+        <item>Persistence Prevails</item>
+        <item>Into the Swing</item>
+        <item>Final Countdown</item>
+        <item>Graduation</item>
+    </string-array>
+</resources>

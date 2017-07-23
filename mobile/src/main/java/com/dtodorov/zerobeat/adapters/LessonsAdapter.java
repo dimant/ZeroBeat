@@ -30,12 +30,14 @@ public class LessonsAdapter extends ArrayAdapter<LessonModel>
 
     private class ViewHolder
     {
-        TextView tvName;
+        TextView tvIcon;
+        TextView tvTitle;
         TextView tvDescription;
 
         ViewHolder(View view)
         {
-            tvName = (TextView) view.findViewById(R.id.lesson_name);
+            tvIcon = (TextView) view.findViewById(R.id.lesson_icon);
+            tvTitle = (TextView) view.findViewById(R.id.lesson_title);
             tvDescription = (TextView) view.findViewById(R.id.lesson_description);
         }
     }
@@ -58,9 +60,9 @@ public class LessonsAdapter extends ArrayAdapter<LessonModel>
             holder = (ViewHolder) convertView.getTag();
         }
 
-        String lessonName = stringResolver.getString(R.string.lesson) + " " + (position + 1);
-        holder.tvName.setText(lessonName);
-        holder.tvDescription.setText(model.lessonDescription);
+        holder.tvIcon.setText(Integer.toString(position + 1));
+        holder.tvTitle.setText(model.title);
+        holder.tvDescription.setText(model.description);
 
         return convertView;
     }
