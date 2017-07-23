@@ -58,7 +58,6 @@ public class PlayActivity extends AppCompatActivity
                 ArrayList<LessonModel> lessons = (ArrayList<LessonModel>) param;
                 LessonsAdapter adapter = new LessonsAdapter(PlayActivity.this, lessons, app.getStringResolver());
                 listView.setAdapter(adapter);
-                listView.setItemChecked(playController.getLesson(), true);
             }
         });
         playController.showLessons();
@@ -71,15 +70,18 @@ public class PlayActivity extends AppCompatActivity
             {
                 if(buttonMusic.isPressed())
                 {
-                    if(isChecked)
-                    {
-                        playController.fire(PlayController.Trigger.Play);
-                    }
-                    else
-                    {
-                        playController.fire(PlayController.Trigger.Stop);
-                    }
+                    eventDispatcher.emit(PlayController.OnMusicButtonPressed, isChecked);
                 }
+            }
+        });
+
+        eventDispatcher.register(PlayController.SetMusicButton, new IEventListener()
+        {
+            @Override
+            public void callback(Object param)
+            {
+                Boolean isChecked = (Boolean) param;
+                buttonMusic.setChecked(isChecked);
             }
         });
     }
@@ -94,14 +96,12 @@ public class PlayActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                app.getPlayController().fire(PlayController.Trigger.Stop);
-                buttonMusic.setChecked(false);
+                app.getEventDispatcher().emit(PlayController.OnLeavingActivity, null);
                 Intent intent = new Intent(PlayActivity.this, SettingsActivity.class);
                 startActivityForResult(intent, SettingsActivity.REQUEST_CODE_PREFERENCES);
                 return true;
             case android.R.id.home:
-                app.getPlayController().fire(PlayController.Trigger.Stop);
-                buttonMusic.setChecked(false);
+                app.getEventDispatcher().emit(PlayController.OnLeavingActivity, null);
                 onBackPressed();
                 return true;
             default:

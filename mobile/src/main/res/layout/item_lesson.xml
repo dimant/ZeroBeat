@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.dtodorov.zerobeat.controls.CheckableConstraintLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/lesson_layout"
@@ -44,4 +44,4 @@
         android:text="abcdefg"
         app:layout_constraintLeft_toLeftOf="@+id/lesson_name"
         app:layout_constraintTop_toBottomOf="@+id/lesson_name"/>
-</com.dtodorov.zerobeat.controls.CheckableConstraintLayout>
+</android.support.constraint.ConstraintLayout>

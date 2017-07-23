@@ -19,20 +19,10 @@ public class PlayController
 {
     public static final String ShowLessons = "showLessons";
     public static final String ChangeLesson = "changeLesson";
+    public static final String SetMusicButton = "setMusicButton";
+    public static final String OnMusicButtonPressed = "onMusicButtonPressed";
+    public static final String OnLeavingActivity = "onLeavingActivity";
 
-    private enum State
-    {
-        Idle,
-        Playing
-    };
-
-    public enum Trigger
-    {
-        Play,
-        Stop
-    };
-
-    private StateMachine<State, Trigger> stateMachine;
     private ISchool school;
     private IEventDispatcher eventDispatcher;
     private Thread schoolThread;
@@ -42,69 +32,95 @@ public class PlayController
             final ISchool school)
     {
         this.eventDispatcher = eventDispatcher;
-        this.stateMachine = new StateMachine<>(State.Idle);
         this.school = school;
 
-        Action homeAction = new Action() {
+        eventDispatcher.emit(PlayController.ShowLessons, school.getLessons());
+        stop();
+
+        eventDispatcher.register(PlayController.OnMusicButtonPressed, new IEventListener()
+        {
             @Override
-            public void doIt()
+            public void callback(Object param)
             {
-                eventDispatcher.emit(PlayController.ShowLessons, school.getLessons());
-                if(schoolThread != null && schoolThread.isAlive())
+                Boolean isChecked = (Boolean) param;
+                if(isChecked)
                 {
-                    schoolThread.interrupt();
+                    play();
                 }
-                schoolThread = null;
-                school.stop();
+                else
+                {
+                    stop();
+                }
             }
-        };
+        });
 
-        stateMachine.configure(State.Idle)
-                .onEntry(homeAction)
-                .permit(Trigger.Play, State.Playing);
-
-        stateMachine.configure(State.Playing)
-                .onEntry(new Action() {
-                    @Override
-                    public void doIt()
-                    {
-                        if(schoolThread != null && schoolThread.isAlive())
-                        {
-                            schoolThread.interrupt();
-                            school.stop();
-                        }
-
-                        school.play();
-                        schoolThread = new Thread(school);
-                        schoolThread.start();
-                    }
-                })
-                .permit(Trigger.Play, State.Idle)
-                .permit(Trigger.Stop, State.Idle);
-
-        homeAction.doIt();
+        eventDispatcher.register(PlayController.OnLeavingActivity, new IEventListener()
+        {
+            @Override
+            public void callback(Object param)
+            {
+                stop();
+                eventDispatcher.emit(PlayController.SetMusicButton, false);
+            }
+        });
 
         eventDispatcher.register(PlayController.ChangeLesson, new IEventListener()
         {
             @Override
             public void callback(Object param)
             {
-                boolean play = false;
-                if(schoolThread != null && schoolThread.isAlive())
+                Integer lesson = (Integer) param;
+
+                if(lesson == school.getLesson())
                 {
-                    schoolThread.interrupt();
-                    school.stop();
-                    play = true;
+                    if(isPlaying())
+                    {
+                        stop();
+                        eventDispatcher.emit(PlayController.SetMusicButton, false);
+                    }
+                    else
+                    {
+                        play();
+                        eventDispatcher.emit(PlayController.SetMusicButton, true);
+                    }
                 }
-                school.setLesson((Integer) param);
-                if(play)
+                else
                 {
-                    school.play();
-                    schoolThread = new Thread(school);
-                    schoolThread.start();
+                    if(isPlaying())
+                    {
+                        stop();
+                    }
+                    else
+                    {
+                        eventDispatcher.emit(PlayController.SetMusicButton, true);
+                    }
+                    school.setLesson((Integer) param);
+                    play();
                 }
             }
         });
+    }
+
+    public boolean isPlaying()
+    {
+        return schoolThread != null && schoolThread.isAlive();
+    }
+
+    public void stop()
+    {
+        if(isPlaying())
+        {
+            schoolThread.interrupt();
+            school.stop();
+        }
+    }
+
+    public void play()
+    {
+        stop();
+        school.play();
+        schoolThread = new Thread(school);
+        schoolThread.start();
     }
 
     public int getLesson()
@@ -112,19 +128,8 @@ public class PlayController
         return school.getLesson();
     }
 
-    public boolean isPlaying()
-    {
-        return school.isPlaying();
-    }
-
     public void showLessons()
     {
         eventDispatcher.emit(PlayController.ShowLessons, school.getLessons());
-    }
-
-    public void fire(Trigger trigger) {
-        if(stateMachine.canFire(trigger)) {
-            stateMachine.fire(trigger);
-        }
     }
 }
