@@ -129,7 +129,7 @@ public class PlayActivity extends AppCompatActivity
         });
 
         playController.showLessons();
-        playController.showNowPlayingAt(0);
+        playController.showNowPlaying();
     }
 
     @Override

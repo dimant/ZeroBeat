@@ -61,6 +61,7 @@ public class PlayController
             public void callback(Object param)
             {
                 stop();
+                school.setLesson(0);
                 eventDispatcher.emit(PlayController.SetMusicButton, false);
             }
         });
@@ -130,8 +131,8 @@ public class PlayController
         eventDispatcher.emit(PlayController.ShowLessons, school.getLessons());
     }
 
-    public void showNowPlayingAt(int i)
+    public void showNowPlaying()
     {
-        eventDispatcher.emit(PlayController.SetNowPlaying, school.getLessonAt(i));
+        eventDispatcher.emit(PlayController.SetNowPlaying, school.getLessonAt(school.getLesson()));
     }
 }
