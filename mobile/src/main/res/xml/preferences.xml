@@ -2,18 +2,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:custom="http://schemas.android.com/apk/res-auto">
 
-    <de.mrapp.android.preference.SeekBarPreference
-        android:title="@string/seekbar_wpm_title"
-        android:summary="@string/seekbar_wpm_summary"
-        android:dialogTitle="@string/seekbar_wpm_title"
-        android:dialogMessage="@string/seekbar_wpm_message"
-        custom:unit="@string/seekbar_wpm_unit"
-        android:key="@string/seekbar_wpm_key"
+    <de.mrapp.android.preference.NumberPickerPreference
+        android:title="@string/numberpicker_wpm_title"
+        android:summary="@string/numberpicker_wpm_summary"
+        android:dialogTitle="@string/numberpicker_wpm_title"
+        android:dialogMessage="@string/numberpicker_wpm_message"
+        custom:unit="@string/numberpicker_wpm_unit"
+        android:key="@string/numberpicker_wpm_key"
         android:max="1000"
         custom:min="0"
-        custom:decimals="0"
-        custom:floatingPointSeparator="."
-        custom:showProgress="true"
         custom:showValueAsSummary="false"/>
 
     <de.mrapp.android.preference.NumberPickerPreference

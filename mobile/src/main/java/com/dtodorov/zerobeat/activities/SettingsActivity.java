@@ -52,16 +52,15 @@ public class SettingsActivity extends AppCompatActivity
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
 
-
             ZeroBeatApplication app = (ZeroBeatApplication) getActivity().getApplication();
             Configuration configuration = app.getConfiguration();
             configuration.loadConfiguration(app);
 
-            SeekBarPreference wpmPreference =
-                    (SeekBarPreference) findPreference(getString(R.string.seekbar_wpm_key));
-            wpmPreference.setMaxValue(60);
-            wpmPreference.setMinValue(10);
-            wpmPreference.setValue(configuration.getWpm());
+            NumberPickerPreference wpmPreference =
+                    (NumberPickerPreference) findPreference(getString(R.string.numberpicker_wpm_key));
+            wpmPreference.setMaxNumber(60);
+            wpmPreference.setMinNumber(10);
+            wpmPreference.setNumber(configuration.getWpm());
 
             SeekBarPreference frequencyPreference =
                     (SeekBarPreference) findPreference(getString(R.string.seekbar_frequency_key));

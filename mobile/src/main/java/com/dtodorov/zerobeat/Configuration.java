@@ -64,7 +64,7 @@ public class Configuration implements ISignalGeneratorConfiguration, ITeacherCon
     {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 
-        wpm = Math.round(sharedPref.getFloat(context.getString(R.string.seekbar_wpm_key), 15));
+        wpm = sharedPref.getInt(context.getString(R.string.numberpicker_wpm_key), 15);
 
         frequency = Math.round(sharedPref.getFloat(context.getString(R.string.seekbar_frequency_key), 701));
 

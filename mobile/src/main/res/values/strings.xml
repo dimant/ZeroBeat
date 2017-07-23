@@ -17,11 +17,11 @@
     <string name="seekbar_frequency_unit">Hertz</string>
     <string name="seekbar_frequency_key">seekbar_frequency</string>
 
-    <string name="seekbar_wpm_title">Words per Minute</string>
-    <string name="seekbar_wpm_summary">Adjust the sending speed.</string>
-    <string name="seekbar_wpm_message">Start with the words per minute you want to achieve. Resist the temptation to lower it if you cant copy every character, just keep at it!</string>
-    <string name="seekbar_wpm_unit">wpm</string>
-    <string name="seekbar_wpm_key">seekbar_wpm</string>
+    <string name="numberpicker_wpm_title">Words per Minute</string>
+    <string name="numberpicker_wpm_summary">Adjust the sending speed.</string>
+    <string name="numberpicker_wpm_message">Start with the words per minute you want to achieve. Resist the temptation to lower it if you cant copy every character, just keep at it!</string>
+    <string name="numberpicker_wpm_unit">wpm</string>
+    <string name="numberpicker_wpm_key">numberpicker_wpm</string>
 
     <string name="numberpicker_group_size_title">Group Size</string>
     <string name="numberpicker_group_size_summary">Number of characters per group.</string>
