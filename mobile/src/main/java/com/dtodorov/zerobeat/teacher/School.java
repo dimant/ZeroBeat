@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class School implements ISchool
 {
     private final AudioTrack track;
-    private final TypedArray lessonTitles;
+    ArrayList<LessonModel> models;
     private Lessons lessons;
     private Teacher teacher;
     private MorseTracker morseTracker;
@@ -39,7 +39,6 @@ public class School implements ISchool
     )
     {
         this.lessons = lessons;
-        this.lessonTitles = lessonTitles;
         this.teacher = teacher;
         this.morseTracker = morseTracker;
         this.phoneticTracker = phoneticTracker;
@@ -53,23 +52,30 @@ public class School implements ISchool
                 AudioFormat.ENCODING_PCM_16BIT,
                 count * (Short.SIZE / 8),
                 AudioTrack.MODE_STREAM);
-    }
 
-    @Override
-    public ArrayList<LessonModel> getLessons()
-    {
-        ArrayList<LessonModel> models = new ArrayList<>();
+        models = new ArrayList<>();
         ArrayList<String> strLessons = lessons.getLessons();
 
         for(int i = 0; i < strLessons.size(); i++)
         {
             LessonModel model = new LessonModel();
+            model.position = i+1;
             model.title = lessonTitles.getString(i);
             model.description = strLessons.get(i);
             models.add(model);
         }
+    }
 
+    @Override
+    public ArrayList<LessonModel> getLessons()
+    {
         return models;
+    }
+
+    @Override
+    public LessonModel getLessonAt(int i)
+    {
+        return models.get(i);
     }
 
     @Override

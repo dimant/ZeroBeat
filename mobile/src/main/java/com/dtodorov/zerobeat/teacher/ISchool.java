@@ -16,6 +16,8 @@ public interface ISchool extends Runnable
 
     int getLesson();
 
+    LessonModel getLessonAt(int i);
+
     boolean isPlaying();
 
     void stop();

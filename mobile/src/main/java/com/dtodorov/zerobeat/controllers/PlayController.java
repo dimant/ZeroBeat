@@ -22,6 +22,7 @@ public class PlayController
     public static final String SetMusicButton = "setMusicButton";
     public static final String OnMusicButtonPressed = "onMusicButtonPressed";
     public static final String OnLeavingActivity = "onLeavingActivity";
+    public static final String SetNowPlaying = "setNowPlaying";
 
     private ISchool school;
     private IEventDispatcher eventDispatcher;
@@ -69,9 +70,9 @@ public class PlayController
             @Override
             public void callback(Object param)
             {
-                Integer lesson = (Integer) param;
+                Integer i = (Integer) param;
 
-                if(lesson == school.getLesson())
+                if(i == school.getLesson())
                 {
                     if(isPlaying())
                     {
@@ -94,6 +95,7 @@ public class PlayController
                     {
                         eventDispatcher.emit(PlayController.SetMusicButton, true);
                     }
+                    eventDispatcher.emit(PlayController.SetNowPlaying, school.getLessonAt(i));
                     school.setLesson((Integer) param);
                     play();
                 }
@@ -123,13 +125,13 @@ public class PlayController
         schoolThread.start();
     }
 
-    public int getLesson()
-    {
-        return school.getLesson();
-    }
-
     public void showLessons()
     {
         eventDispatcher.emit(PlayController.ShowLessons, school.getLessons());
+    }
+
+    public void showNowPlayingAt(int i)
+    {
+        eventDispatcher.emit(PlayController.SetNowPlaying, school.getLessonAt(i));
     }
 }

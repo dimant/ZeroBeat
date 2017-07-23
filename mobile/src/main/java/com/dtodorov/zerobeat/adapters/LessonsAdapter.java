@@ -60,7 +60,7 @@ public class LessonsAdapter extends ArrayAdapter<LessonModel>
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.tvIcon.setText(Integer.toString(position + 1));
+        holder.tvIcon.setText(Integer.toString(model.position));
         holder.tvTitle.setText(model.title);
         holder.tvDescription.setText(model.description);
 

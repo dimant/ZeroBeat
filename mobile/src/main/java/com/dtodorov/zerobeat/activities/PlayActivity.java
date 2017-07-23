@@ -3,12 +3,14 @@ package com.dtodorov.zerobeat.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.dtodorov.androlib.eventdispatcher.IEventDispatcher;
@@ -41,6 +43,19 @@ public class PlayActivity extends AppCompatActivity
         Intent intent = getIntent();
         app.getConfiguration().setCourseLevel(intent.getStringExtra(PlayActivity.COURSE_LEVEL_KEY));
 
+        switch(app.getConfiguration().getCourseLevel())
+        {
+            case Beginner:
+                setTitle(R.string.cardview_beginner_title);
+                break;
+            case Intermediate:
+                setTitle(R.string.cardview_intermediate_title);
+                break;
+            case Advanced:
+                setTitle(R.string.cardview_advanced_title);
+                break;
+        }
+
         final IEventDispatcher eventDispatcher = app.getEventDispatcher();
         final PlayController playController = app.getPlayController();
 
@@ -60,7 +75,6 @@ public class PlayActivity extends AppCompatActivity
                 listView.setAdapter(adapter);
             }
         });
-        playController.showLessons();
 
         buttonMusic = (ToggleButton) findViewById(R.id.button_music);
         buttonMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
@@ -84,6 +98,38 @@ public class PlayActivity extends AppCompatActivity
                 buttonMusic.setChecked(isChecked);
             }
         });
+
+        final CardView cardNowPlaying = (CardView) findViewById(R.id.cardview_now_playing);
+        cardNowPlaying.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Boolean newState = !buttonMusic.isChecked();
+                eventDispatcher.emit(PlayController.OnMusicButtonPressed, newState);
+                buttonMusic.setChecked(newState);
+            }
+        });
+
+        eventDispatcher.register(PlayController.SetNowPlaying, new IEventListener()
+        {
+            @Override
+            public void callback(Object param)
+            {
+                LessonModel model = (LessonModel) param;
+
+                TextView tvIcon = (TextView) cardNowPlaying.findViewById(R.id.lesson_icon);
+                TextView tvTitle = (TextView) cardNowPlaying.findViewById(R.id.lesson_title);
+                TextView tvDescription = (TextView) cardNowPlaying.findViewById(R.id.lesson_description);
+
+                tvIcon.setText(Integer.toString(model.position));
+                tvTitle.setText(model.title);
+                tvDescription.setText(model.description);
+            }
+        });
+
+        playController.showLessons();
+        playController.showNowPlayingAt(0);
     }
 
     @Override
