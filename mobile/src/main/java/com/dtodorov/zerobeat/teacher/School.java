@@ -28,6 +28,7 @@ public class School implements ISchool
     private PhoneticTracker phoneticTracker;
     private int lesson;
     private Configuration configuration;
+    private float phoneticNoiseRatio;
 
     public School(
             Lessons lessons,
@@ -66,6 +67,8 @@ public class School implements ISchool
             model.description = strLessons.get(i);
             models.add(model);
         }
+
+        phoneticNoiseRatio = 4.0f;
     }
 
     @Override
@@ -133,7 +136,10 @@ public class School implements ISchool
 
             // spell in morse
             sbuffer = morseTracker.track(group);
-            noiseMixer.addNoise(sbuffer, 0.5f);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            noiseMixer.addNoise(sbuffer, configuration.getNoiseLevel());
             if(Thread.currentThread().isInterrupted())
                 return;
 
@@ -143,6 +149,10 @@ public class School implements ISchool
 
             // spell phonetically
             bbuffer = phoneticTracker.track(group.substring(0, 1), 400);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            noiseMixer.addNoise(bbuffer, configuration.getNoiseLevel() / phoneticNoiseRatio);
             if(Thread.currentThread().isInterrupted())
                 return;
 
@@ -168,11 +178,19 @@ public class School implements ISchool
         if(Thread.currentThread().isInterrupted())
             return;
 
+        noiseMixer.addNoise(sbuffer, configuration.getNoiseLevel());
+        if(Thread.currentThread().isInterrupted())
+            return;
+
         track.write(sbuffer, 0, sbuffer.length);
         if(Thread.currentThread().isInterrupted())
             return;
 
         bbuffer = phoneticTracker.track(group, 500);
+        if(Thread.currentThread().isInterrupted())
+            return;
+
+        noiseMixer.addNoise(bbuffer, configuration.getNoiseLevel() / phoneticNoiseRatio);
         if(Thread.currentThread().isInterrupted())
             return;
 
@@ -190,11 +208,19 @@ public class School implements ISchool
             if(Thread.currentThread().isInterrupted())
                 return;
 
+            noiseMixer.addNoise(sbuffer, configuration.getNoiseLevel());
+            if(Thread.currentThread().isInterrupted())
+                return;
+
             track.write(sbuffer, 0, sbuffer.length);
             if(Thread.currentThread().isInterrupted())
                 return;
 
             bbuffer = phoneticTracker.track(group, 250);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            noiseMixer.addNoise(bbuffer, configuration.getNoiseLevel() / phoneticNoiseRatio);
             if(Thread.currentThread().isInterrupted())
                 return;
 
@@ -218,6 +244,10 @@ public class School implements ISchool
         if(Thread.currentThread().isInterrupted())
             return;
 
+        noiseMixer.addNoise(sbuffer, configuration.getNoiseLevel());
+        if(Thread.currentThread().isInterrupted())
+            return;
+
         track.write(sbuffer, 0, sbuffer.length);
         if(Thread.currentThread().isInterrupted())
             return;
@@ -229,6 +259,10 @@ public class School implements ISchool
                 return;
 
             sbuffer = morseTracker.track(group);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            noiseMixer.addNoise(sbuffer, configuration.getNoiseLevel());
             if(Thread.currentThread().isInterrupted())
                 return;
 

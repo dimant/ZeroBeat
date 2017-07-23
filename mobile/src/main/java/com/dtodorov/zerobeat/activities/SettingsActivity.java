@@ -73,6 +73,12 @@ public class SettingsActivity extends AppCompatActivity
             groupSizePreference.setMaxNumber(7);
             groupSizePreference.setMinNumber(2);
             groupSizePreference.setNumber(configuration.getGroupSize());
+
+            SeekBarPreference noisePreference =
+                    (SeekBarPreference) findPreference(getString(R.string.seekbar_noise_key));
+            noisePreference.setMaxValue(100);
+            noisePreference.setMinValue(0);
+            noisePreference.setValue(configuration.getNoiseLevel());
         }
     }
 }

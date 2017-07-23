@@ -29,6 +29,12 @@
     <string name="numberpicker_group_size_unit">Chars</string>
     <string name="numberpicker_group_size_key">numberpicker_group_size</string>
 
+    <string name="seekbar_noise_title">Noise</string>
+    <string name="seekbar_noise_summary">Adjust the noise floor level.</string>
+    <string name="seekbar_noise_message">Try increasing the noise floor for a more realistic practice experience.</string>
+    <string name="seekbar_noise_unit">%</string>
+    <string name="seekbar_noise_key">seekbar_noise</string>
+
     <string name="cardview_beginner_title">Beginner</string>
     <string name="cardview_beginner_summary">Learn each symbol separately.</string>
 

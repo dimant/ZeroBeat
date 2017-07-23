@@ -16,21 +16,29 @@ public class NoiseMixer
 
     public void addNoise(short[] input, float level)
     {
+        if(level < 1.0f)
+            return;
+
         short sample;
+        float ratio = level / 100.0f;
         for(int i = 0; i < input.length; i++)
         {
             sample = (short) rng.nextInt();
-            input[i] = (short) (input[i] * (1.0 - level) + sample * level);
+            input[i] = (short) (input[i] * (1.0 - ratio) + sample * ratio);
         }
     }
 
     public void addNoise(byte[] input, float level)
     {
+        if(level < 1.0f)
+            return;
+
         byte sample;
+        float ratio = level / 100.0f;
         for(int i = 0; i < input.length; i++)
         {
             sample = (byte) rng.nextInt();
-            input[i] = (byte) (input[i] * (1.0 - level) + sample * level);
+            input[i] = (byte) (input[i] * (1.0 - ratio) + sample * ratio);
         }
     }
 }

@@ -29,6 +29,7 @@ public class Configuration implements ISignalGeneratorConfiguration, ITeacherCon
     private int wpm;
     private int frequency;
     private int groupSize;
+    private float noiseLevel;
     private CourseLevel courseLevel;
 
     @Override
@@ -47,6 +48,12 @@ public class Configuration implements ISignalGeneratorConfiguration, ITeacherCon
     public int getFrequency()
     {
         return frequency;
+    }
+
+    @Override
+    public float getNoiseLevel()
+    {
+        return noiseLevel;
     }
 
     @Override
@@ -69,5 +76,7 @@ public class Configuration implements ISignalGeneratorConfiguration, ITeacherCon
         frequency = Math.round(sharedPref.getFloat(context.getString(R.string.seekbar_frequency_key), 701));
 
         groupSize = sharedPref.getInt(context.getString(R.string.numberpicker_group_size_key), 5);
+
+        noiseLevel = sharedPref.getFloat(context.getString(R.string.seekbar_noise_key), 0.0f);
     }
 }

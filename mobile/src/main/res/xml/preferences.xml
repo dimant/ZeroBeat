@@ -34,6 +34,20 @@
         custom:showProgress="true"
         custom:showValueAsSummary="false"/>
 
+    <de.mrapp.android.preference.SeekBarPreference
+        android:title="@string/seekbar_noise_title"
+        android:summary="@string/seekbar_noise_summary"
+        android:dialogTitle="@string/seekbar_noise_title"
+        android:dialogMessage="@string/seekbar_noise_message"
+        custom:unit="@string/seekbar_noise_unit"
+        android:key="@string/seekbar_noise_key"
+        android:max="1000"
+        custom:min="0"
+        custom:decimals="0"
+        custom:floatingPointSeparator="."
+        custom:showProgress="true"
+        custom:showValueAsSummary="false"/>
+
     <de.mrapp.android.preference.DialogPreference
         android:title="@string/attributions_title"
         android:summary="@string/attributions_summary"

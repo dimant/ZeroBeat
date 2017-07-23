@@ -9,4 +9,5 @@ import com.dtodorov.zerobeat.Configuration;
 public interface ISchoolConfiguration
 {
     Configuration.CourseLevel getCourseLevel();
+    float getNoiseLevel();
 }
