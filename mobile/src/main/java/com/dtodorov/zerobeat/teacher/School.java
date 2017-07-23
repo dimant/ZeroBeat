@@ -6,12 +6,11 @@ import android.media.AudioManager;
 import android.media.AudioTrack;
 
 import com.dtodorov.zerobeat.Configuration;
-import com.dtodorov.zerobeat.R;
+import com.dtodorov.zerobeat.audio.NoiseMixer;
 import com.dtodorov.zerobeat.audio.morse.MorseTracker;
-import com.dtodorov.zerobeat.audio.voice.PhoneticTracker;
+import com.dtodorov.zerobeat.audio.PhoneticTracker;
 import com.dtodorov.zerobeat.models.LessonModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 public class School implements ISchool
 {
     private final AudioTrack track;
+    private final NoiseMixer noiseMixer;
     ArrayList<LessonModel> models;
     private Lessons lessons;
     private Teacher teacher;
@@ -35,6 +35,7 @@ public class School implements ISchool
             Teacher teacher,
             MorseTracker morseTracker,
             PhoneticTracker phoneticTracker,
+            NoiseMixer noiseMixer,
             Configuration configuration
     )
     {
@@ -42,6 +43,7 @@ public class School implements ISchool
         this.teacher = teacher;
         this.morseTracker = morseTracker;
         this.phoneticTracker = phoneticTracker;
+        this.noiseMixer = noiseMixer;
         this.configuration = configuration;
 
         int count = Configuration.SAMPLING_RATE * Configuration.CHANNELS * 60 / 10; // enough space for one PARIS at 10wpm
@@ -131,6 +133,7 @@ public class School implements ISchool
 
             // spell in morse
             sbuffer = morseTracker.track(group);
+            noiseMixer.addNoise(sbuffer, 0.5f);
             if(Thread.currentThread().isInterrupted())
                 return;
 

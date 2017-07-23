@@ -1,4 +1,4 @@
-package com.dtodorov.zerobeat.audio.voice;
+package com.dtodorov.zerobeat.audio;
 
 import android.content.res.Resources;
 

@@ -5,9 +5,10 @@ import android.app.Application;
 import com.dtodorov.androlib.eventdispatcher.EventDispatcher;
 import com.dtodorov.androlib.eventdispatcher.IEventDispatcher;
 import com.dtodorov.androlib.services.StringResolver;
+import com.dtodorov.zerobeat.audio.NoiseMixer;
 import com.dtodorov.zerobeat.audio.morse.MorseTracker;
 import com.dtodorov.zerobeat.audio.morse.SignalGenerator;
-import com.dtodorov.zerobeat.audio.voice.PhoneticTracker;
+import com.dtodorov.zerobeat.audio.PhoneticTracker;
 import com.dtodorov.zerobeat.controllers.PlayController;
 import com.dtodorov.zerobeat.teacher.Lessons;
 import com.dtodorov.zerobeat.teacher.School;
@@ -77,6 +78,7 @@ public class ZeroBeatApplication extends Application
                         new Teacher(configuration),
                         new MorseTracker(new SignalGenerator(configuration)),
                         new PhoneticTracker(getResources()),
+                        new NoiseMixer(),
                         configuration));
     }
 }

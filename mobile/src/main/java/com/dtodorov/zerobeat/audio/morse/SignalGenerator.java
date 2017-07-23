@@ -2,6 +2,8 @@ package com.dtodorov.zerobeat.audio.morse;
 
 import com.dtodorov.zerobeat.Configuration;
 
+import java.util.Random;
+
 /**
  * Created by diman on 7/8/2017.
  */
