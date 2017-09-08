@@ -33,7 +33,7 @@ public class Teacher implements ITeacher
         {
             builder.append(
                     lesson.charAt(
-                            rng.nextInt(lesson.length() - 1)));
+                            rng.nextInt(lesson.length())));
 
         }
         builder.append(' ');
@@ -47,7 +47,7 @@ public class Teacher implements ITeacher
         int i, idx;
         StringBuilder builder = new StringBuilder(configuration.getGroupSize() + 1);
 
-        idx = rng.nextInt(lesson.length() - 1);
+        idx = rng.nextInt(lesson.length());
         for(i = 0; i < configuration.getGroupSize(); i++)
         {
             builder.append(lesson.charAt(idx));

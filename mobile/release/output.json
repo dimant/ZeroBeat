@@ -1,1 +1,1 @@
-[{"outputType":{"type":"APK"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":40},"outputFile":{"path":"D:\\src\\ZeroBeat\\mobile\\release\\mobile-release.apk"},"properties":{"packageId":"com.dtodorov.zerobeat","split":""}}]
+[{"outputType":{"type":"APK"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":42},"path":"mobile-release.apk","properties":{"packageId":"com.dtodorov.zerobeat","split":"","minSdkVersion":"21"}}]

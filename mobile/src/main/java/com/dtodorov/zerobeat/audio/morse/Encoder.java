@@ -69,7 +69,7 @@ public class Encoder
         {
             if(Character.compare(c, ' ') == 0)
             {
-                signalGenerator.writeWordSpace();
+                signalGenerator.writeLetterSpace();
             }
             else
             {
@@ -89,8 +89,7 @@ public class Encoder
                         }
                         signalGenerator.writeSymbolSpace();
                     }
-                    signalGenerator.writeSymbolSpace();
-                    signalGenerator.writeSymbolSpace();
+                    signalGenerator.writeLetterSpace();
                 }
             }
         }

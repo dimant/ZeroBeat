@@ -23,6 +23,12 @@
     <string name="numberpicker_wpm_unit">wpm</string>
     <string name="numberpicker_wpm_key">numberpicker_wpm</string>
 
+    <string name="numberpicker_farnsworth_wpm_title">Farnsworth WPM</string>
+    <string name="numberpicker_farnsworth_wpm_summary">Increase symbol spacing.</string>
+    <string name="numberpicker_farnsworth_wpm_message">To learn using Farnsworth spacing, start with a low symbol spacing (5-7wpm) and gradually increase until you reach the wpm you want to achieve.</string>
+    <string name="numberpicker_farnsworth_wpm_unit">wpm</string>
+    <string name="numberpicker_farnsworth_wpm_key">numberpicker_farnsworth_wpm</string>
+
     <string name="numberpicker_group_size_title">Group Size</string>
     <string name="numberpicker_group_size_summary">Number of characters per group.</string>
     <string name="numberpicker_group_size_message">Typical lessons are thaught at 5 characters per group. If you have trouble copy 5 characters at a time, reduce this number.</string>

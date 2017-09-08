@@ -62,6 +62,12 @@ public class SettingsActivity extends AppCompatActivity
             wpmPreference.setMinNumber(10);
             wpmPreference.setNumber(configuration.getWpm());
 
+            NumberPickerPreference farnsworthWpmPreference =
+                    (NumberPickerPreference) findPreference(getString(R.string.numberpicker_farnsworth_wpm_key));
+            farnsworthWpmPreference.setMaxNumber(60);
+            farnsworthWpmPreference.setMinNumber(5);
+            farnsworthWpmPreference.setNumber(configuration.getFarnsworthWpm());
+
             SeekBarPreference frequencyPreference =
                     (SeekBarPreference) findPreference(getString(R.string.seekbar_frequency_key));
             frequencyPreference.setMaxValue(800);

@@ -12,5 +12,5 @@ interface ISignalGenerator
 
     void writeSymbolSpace();
 
-    void writeWordSpace();
+    void writeLetterSpace();
 }

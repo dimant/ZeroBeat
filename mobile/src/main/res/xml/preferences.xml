@@ -14,6 +14,17 @@
         custom:showValueAsSummary="false"/>
 
     <de.mrapp.android.preference.NumberPickerPreference
+        android:title="@string/numberpicker_farnsworth_wpm_title"
+        android:summary="@string/numberpicker_farnsworth_wpm_summary"
+        android:dialogTitle="@string/numberpicker_farnsworth_wpm_title"
+        android:dialogMessage="@string/numberpicker_farnsworth_wpm_message"
+        custom:unit="@string/numberpicker_farnsworth_wpm_unit"
+        android:key="@string/numberpicker_farnsworth_wpm_key"
+        android:max="1000"
+        custom:min="0"
+        custom:showValueAsSummary="false"/>
+
+    <de.mrapp.android.preference.NumberPickerPreference
         android:title="@string/numberpicker_group_size_title"
         android:summary="@string/numberpicker_group_size_summary"
         android:dialogMessage="@string/numberpicker_group_size_message"

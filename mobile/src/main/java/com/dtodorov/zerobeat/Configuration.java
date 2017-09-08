@@ -27,6 +27,7 @@ public class Configuration implements ISignalGeneratorConfiguration, ITeacherCon
     }
 
     private int wpm;
+    private int farnsworthWpm;
     private int frequency;
     private int groupSize;
     private float noiseLevel;
@@ -43,6 +44,9 @@ public class Configuration implements ISignalGeneratorConfiguration, ITeacherCon
     {
         return wpm;
     }
+
+    @Override
+    public int getFarnsworthWpm() { return farnsworthWpm; }
 
     @Override
     public int getFrequency()
@@ -72,6 +76,8 @@ public class Configuration implements ISignalGeneratorConfiguration, ITeacherCon
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 
         wpm = sharedPref.getInt(context.getString(R.string.numberpicker_wpm_key), 15);
+
+        farnsworthWpm = sharedPref.getInt(context.getString(R.string.numberpicker_farnsworth_wpm_key), 5);
 
         frequency = Math.round(sharedPref.getFloat(context.getString(R.string.seekbar_frequency_key), 701));
 

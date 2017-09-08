@@ -2,8 +2,6 @@ package com.dtodorov.zerobeat.audio.morse;
 
 import com.dtodorov.zerobeat.Configuration;
 
-import java.util.Random;
-
 /**
  * Created by diman on 7/8/2017.
  */
@@ -34,14 +32,19 @@ public class SignalGenerator implements ISignalGenerator
         return 3 * getDotDuration();
     }
 
-    public int getDotSamples()
+    public int getDurationSamples(double duration)
     {
-        return (int) Math.round(Configuration.SAMPLING_RATE * getDotDuration() / 1000);
+        return (int) Math.round(Configuration.SAMPLING_RATE * duration / 1000);
     }
 
-    public int getDashSamples()
+    public double getSymbolSpaceDuration()
     {
-        return (int) Math.round(Configuration.SAMPLING_RATE * getDashDuration() / 1000);
+        return getDotDuration();
+    }
+
+    public double getLetterSpaceDuration()
+    {
+        return 2 * 3 * DOT_STANDARD / configuration.getFarnsworthWpm();
     }
 
     public void setBuffer(short[] buffer)
@@ -94,24 +97,24 @@ public class SignalGenerator implements ISignalGenerator
     @Override
     public void writeDash()
     {
-        writeSignal(this.buffer, getDashSamples());
+        writeSignal(this.buffer, getDurationSamples(getDashDuration()));
     }
 
     @Override
     public void writeDot()
     {
-        writeSignal(this.buffer, getDotSamples());
+        writeSignal(this.buffer, getDurationSamples(getDotDuration()));
     }
 
     @Override
     public void writeSymbolSpace()
     {
-        writeSilence(this.buffer, getDotSamples());
+        writeSilence(this.buffer, getDurationSamples(getSymbolSpaceDuration()));
     }
 
     @Override
-    public void writeWordSpace()
+    public void writeLetterSpace()
     {
-        writeSilence(this.buffer, 2 * getDashSamples());
+        writeSilence(this.buffer, getDurationSamples(getLetterSpaceDuration()));
     }
 }
