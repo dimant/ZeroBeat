@@ -64,9 +64,22 @@ public class SignalGenerator implements ISignalGenerator
         int j;
         short sample;
 
+        double filter_ratio = 0.015;
+        long filter_samples = Math.round(samples * filter_ratio);
+
         for(i = 0; i < samples; i++)
         {
-            sample = (short)(Math.sin(2 * Math.PI * i / (Configuration.SAMPLING_RATE / configuration.getFrequency())) * 0x7FFF);
+            double d = 1.0;
+            if(i < filter_samples)
+            {
+                d *= i / filter_samples;
+            }
+            else if(i > samples - filter_samples)
+            {
+                d *= (filter_samples - i) / filter_samples;
+            }
+
+            sample = (short)(Math.sin(2 * Math.PI * i / (Configuration.SAMPLING_RATE / configuration.getFrequency())) * (0x7FFF * d) + 0xFFF);
 
             for(j = 0; j < Configuration.CHANNELS; j++)
             {
