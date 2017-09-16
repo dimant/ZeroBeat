@@ -50,6 +50,9 @@
     <string name="cardview_advanced_title">Advanced</string>
     <string name="cardview_advanced_summary">Learn symbols by listening only to morse.</string>
 
+    <string name="cardview_sending_practice_title">Sending Practice</string>
+    <string name="cardview_sending_practice_summary">Send the group you received.</string>
+
     <!-- Play Icon -->
     <string name="play_icon_upper_path_data">M 44 32 L 44 64 L 100 64 L 100 64 Z</string>
     <string name="play_icon_bottom_path_data">M 44 96 L 44 64 L 100 64 L 100 64 Z</string>

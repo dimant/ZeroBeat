@@ -234,7 +234,6 @@ public class School implements ISchool
     {
         String group;
         short[] sbuffer;
-        byte[] bbuffer;
 
         group = teacher.intro(lessons.getLesson(lesson));
         if(Thread.currentThread().isInterrupted())
@@ -272,6 +271,41 @@ public class School implements ISchool
         }
     }
 
+    public void sendingPracticeLesson()
+    {
+        String group;
+        short[] sbuffer;
+        short[] pauseBuffer;
+
+        while(true)
+        {
+            group = teacher.group(lessons.getLesson(lesson));
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            sbuffer = morseTracker.track(group);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            noiseMixer.addNoise(sbuffer, configuration.getNoiseLevel());
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            track.write(sbuffer, 0, sbuffer.length);
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            pauseBuffer = new short[sbuffer.length * 2];
+            noiseMixer.addNoise(pauseBuffer, configuration.getNoiseLevel());
+            if(Thread.currentThread().isInterrupted())
+                return;
+
+            track.write(pauseBuffer, 0, sbuffer.length);
+            if(Thread.currentThread().isInterrupted())
+                return;
+        }
+    }
+
     @Override
     public void run()
     {
@@ -286,6 +320,8 @@ public class School implements ISchool
             case Advanced:
                 advancedLesson();
                 break;
+            case SendingPractice:
+                sendingPracticeLesson();
             default:
                 break;
         }

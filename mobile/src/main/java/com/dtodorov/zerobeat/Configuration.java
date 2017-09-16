@@ -23,7 +23,8 @@ public class Configuration implements ISignalGeneratorConfiguration, ITeacherCon
     {
         Beginner,
         Intermediate,
-        Advanced
+        Advanced,
+        SendingPractice
     }
 
     private int wpm;

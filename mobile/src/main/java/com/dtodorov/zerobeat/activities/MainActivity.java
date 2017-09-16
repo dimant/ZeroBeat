@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity
         adapter.addAll(
                 new CardModel(R.mipmap.telegraph_boy, R.string.cardview_beginner_title, R.string.cardview_beginner_summary, Configuration.CourseLevel.Beginner),
                 new CardModel(R.mipmap.telegraph_lesson, R.string.cardview_intermediate_title, R.string.cardview_intermediate_summary, Configuration.CourseLevel.Intermediate),
-                new CardModel(R.mipmap.marine_field_telegraph, R.string.cardview_advanced_title, R.string.cardview_advanced_summary, Configuration.CourseLevel.Advanced));
+                new CardModel(R.mipmap.marine_field_telegraph, R.string.cardview_advanced_title, R.string.cardview_advanced_summary, Configuration.CourseLevel.Advanced),
+                new CardModel(R.mipmap.sending_practice, R.string.cardview_sending_practice_title, R.string.cardview_sending_practice_summary, Configuration.CourseLevel.SendingPractice));
 
         lvCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -42,14 +43,12 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
